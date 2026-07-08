@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -59,7 +60,7 @@ function VelocityMarquee() {
           {[0, 1, 2, 3].map((i) => (
             <span
               key={i}
-              className="shrink-0 font-display font-semibold uppercase leading-none tracking-[0.08em] [font-stretch:115%] text-foreground text-[clamp(22px,3.6vw,42px)]"
+              className="shrink-0 font-display font-semibold uppercase leading-none tracking-[0.08em] text-foreground text-[clamp(22px,3.6vw,42px)]"
             >
               {MARQUEE_TEXT}
             </span>
@@ -72,7 +73,7 @@ function VelocityMarquee() {
 
 function FooterLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-bright">
+    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-yellow">
       {children}
     </p>
   );
@@ -100,7 +101,7 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
 
   return (
     <>
-      {/* Marquee strip — stays in the ivory page flow above the footer curtain */}
+      {/* Marquee strip — stays in the white page flow above the footer curtain */}
       {curtain && (
         <div data-print-hidden className="relative z-10 bg-background">
           <VelocityMarquee />
@@ -109,7 +110,7 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
 
       <footer
         ref={footerRef}
-        className={`bg-marine text-background ${
+        className={`bg-blue text-background ${
           sticky ? "sticky bottom-0 z-0 motion-reduce:static" : ""
         }`}
       >
@@ -120,7 +121,7 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
               <p
                 role="img"
                 aria-label="Haarstudio Anetta"
-                className="flex flex-col"
+                className="flex flex-col items-start gap-3"
               >
                 <span
                   aria-hidden
@@ -128,12 +129,14 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
                 >
                   Haarstudio
                 </span>
-                <span
+                <Image
                   aria-hidden
-                  className="font-display font-semibold uppercase leading-[1.15] tracking-[0.06em] [font-stretch:115%] text-background text-[34px]"
-                >
-                  Anetta
-                </span>
+                  src="/logo/anetta-wordmark.png"
+                  alt=""
+                  width={1400}
+                  height={640}
+                  className="h-auto w-[172px]"
+                />
               </p>
               <p className="mt-5 max-w-[36ch] text-[14px] font-medium leading-[1.6] text-background/70">
                 Der freundliche Damen-, Herren- und Kinderfriseur
@@ -166,7 +169,7 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
               </div>
               <a
                 href={`tel:${SALON.phoneE164}`}
-                className="mt-5 inline-flex h-11 items-center justify-center bg-background px-6 text-[12px] font-semibold uppercase tracking-[0.18em] text-marine transition-transform duration-200 hover:scale-[1.03]"
+                className="mt-5 inline-flex h-11 items-center justify-center bg-yellow px-6 text-[12px] font-semibold uppercase tracking-[0.18em] text-blue transition-transform duration-200 hover:scale-[1.03]"
               >
                 Termin vereinbaren
               </a>

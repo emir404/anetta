@@ -43,7 +43,7 @@ export function Termin() {
               <TextLineReveal
                 as="h1"
                 lines={["Termin", "vereinbaren"]}
-                className="mt-3 font-display font-semibold uppercase leading-[1.08] tracking-[0.05em] [font-stretch:115%] text-foreground text-[clamp(32px,5.5vw,64px)]"
+                className="mt-3 font-display font-semibold leading-[1.06] tracking-[-0.01em] text-foreground text-[clamp(32px,5.5vw,64px)]"
               />
 
               <Reveal delay={0.15} className="mt-8 max-w-[460px]">
@@ -80,7 +80,7 @@ export function Termin() {
                       },
                     }}
                   >
-                    <span className="block whitespace-nowrap font-display font-semibold leading-[1.02] tracking-[0.02em] tabular-nums [font-stretch:115%] text-foreground transition-colors duration-500 group-hover:text-accent text-[clamp(36px,5.8vw,72px)]">
+                    <span className="block whitespace-nowrap font-display font-semibold leading-[1.02] tracking-[0.02em] tabular-nums text-foreground transition-colors duration-500 group-hover:text-accent text-[clamp(36px,5.8vw,72px)]">
                       0451&nbsp;79&nbsp;14&nbsp;67
                     </span>
                     <span
@@ -120,7 +120,7 @@ export function Termin() {
                 >
                   <Image
                     src="/images/salon-1.jpg"
-                    alt="Salonstuhl vor dem Spiegel im warmen Abendlicht"
+                    alt="Salonstuhl mit blauem Umhang vor dem Spiegel im hellen Tageslicht"
                     fill
                     preload
                     sizes="(max-width: 1024px) 100vw, 42vw"
@@ -136,7 +136,7 @@ export function Termin() {
         <section className="px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-28">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Reveal>
-              <h2 className="font-display text-[18px] font-semibold uppercase tracking-[0.14em] [font-stretch:115%] text-foreground">
+              <h2 className="font-display text-[18px] font-semibold uppercase tracking-[0.14em] text-foreground">
                 Öffnungszeiten
               </h2>
             </Reveal>
@@ -223,7 +223,7 @@ export function Termin() {
                 <iframe
                   src={MAPS_EMBED_URL}
                   title="Haarstudio Anetta auf Google Maps – Kronsforder Allee 3a, 23560 Lübeck"
-                  className="absolute inset-0 h-full w-full border-0 grayscale-[0.35] contrast-[0.95] sepia-[0.08]"
+                  className="absolute inset-0 h-full w-full border-0 grayscale-[0.25] contrast-[0.97]"
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"

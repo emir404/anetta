@@ -59,7 +59,7 @@ export function About() {
               >
                 <Image
                   src="/images/about-detail.jpg"
-                  alt="Stillleben mit Schere und Kamm auf Leinentüchern im warmen Licht"
+                  alt="Stillleben mit Schere, Kamm und gelber Bürste auf gestapelten Handtüchern"
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
                   className="object-cover"
@@ -86,7 +86,7 @@ export function About() {
           <TextLineReveal
             as="h2"
             lines={["Zeit für", "gutes Haar."]}
-            className="mt-4 font-display font-semibold uppercase leading-[1.08] tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(28px,4.6vw,52px)]"
+            className="mt-4 font-display font-semibold leading-[1.06] tracking-[-0.01em] text-foreground text-[clamp(28px,4.6vw,52px)]"
           />
 
           <Reveal delay={0.15} className="mt-8 max-w-[46ch]">

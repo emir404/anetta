@@ -5,8 +5,9 @@ import { Reveal, EASE, useReducedMotionSafe } from "./Reveal";
 
 /**
  * Interlude: the storefront sign, quoted verbatim (knowledge-base copy rule —
- * original hyphenation preserved). The sign's yellow word on blue becomes the
- * brass word in the line — set in the display voice at sign-lettering scale.
+ * original hyphenation preserved) on its own royal blue, the sign's yellow
+ * word set in the sign's yellow. One of the page's few blue moments (v4:
+ * ~80% white, blue only where the sign speaks).
  */
 export function SignQuote() {
   const reducedMotion = useReducedMotionSafe();
@@ -16,7 +17,7 @@ export function SignQuote() {
       key: "l1",
       content: (
         <>
-          „Der <span className="text-accent">freundliche</span>
+          „Der <span className="text-yellow">freundliche</span>
         </>
       ),
     },
@@ -28,10 +29,10 @@ export function SignQuote() {
     <section
       aria-label="Leitspruch vom Ladenschild"
       data-print-hidden
-      className="bg-surface px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-28"
+      className="bg-blue px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-28"
     >
       <figure className="mx-auto max-w-[980px] text-center">
-        <blockquote className="font-display font-semibold uppercase leading-[1.12] tracking-[0.05em] [font-stretch:115%] text-foreground text-[clamp(23px,5.2vw,60px)]">
+        <blockquote className="font-display font-semibold leading-[1.12] tracking-[-0.01em] text-background text-[clamp(26px,5.2vw,60px)]">
           {lines.map((line, i) => (
             <motion.span
               key={line.key}
@@ -57,8 +58,8 @@ export function SignQuote() {
           ))}
         </blockquote>
         <Reveal delay={0.3}>
-          <span aria-hidden className="mx-auto mt-9 block h-px w-16 bg-accent" />
-          <figcaption className="mt-5 text-[11px] font-semibold uppercase tracking-[0.3em] text-foreground/55">
+          <span aria-hidden className="mx-auto mt-9 block h-px w-16 bg-yellow" />
+          <figcaption className="mt-5 text-[11px] font-semibold uppercase tracking-[0.3em] text-background/60">
             Ladenschild · Kronsforder Allee 3a · Lübeck
           </figcaption>
         </Reveal>

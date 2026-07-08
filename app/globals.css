@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm Hanseatic heritage — translated from the storefront sign at
-     Kronsforder Allee 3a: the sign's deep blue becomes marine ink, its
-     yellow lettering becomes honeyed brass, set on warm ivory paper.
-     See DESIGN.md §4.2 for usage discipline. */
-  --background: #f6f1e7;
-  --foreground: #1d2a36;
-  --surface: #ede5d3;
-  --marine: #16222e;
-  --accent: #8a672c;
-  --accent-bright: #c9a35e;
+  /* Das Schild, auf Weiß — the storefront sign's own colors (v4, client
+     direction 2026-07-08): blue #134792 and yellow #f4b821 sampled from the
+     provided logo artwork. ~80% white ground; blue reserved for the sign
+     moments (hero panel, sign quote, Terminkarte, footer); yellow carries
+     the CTAs. See DESIGN.md §4.2 for usage discipline. */
+  --background: #ffffff;
+  --foreground: #14264d;
+  --surface: #eef2f9;
+  --blue: #134792;
+  --yellow: #f4b821;
+  --accent: #7d5f00;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
-  --color-marine: var(--marine);
+  --color-blue: var(--blue);
+  --color-yellow: var(--yellow);
   --color-accent: var(--accent);
-  --color-accent-bright: var(--accent-bright);
   --font-sans: var(--font-hanken), system-ui, sans-serif;
   --font-display: var(--font-archivo), var(--font-hanken), system-ui, sans-serif;
 }
@@ -50,19 +51,19 @@ body {
 }
 
 ::selection {
-  background: var(--accent-bright);
-  color: var(--marine);
+  background: var(--yellow);
+  color: var(--blue);
 }
 
-/* Keyboard focus: brass ring on ivory, bright brass inside dark bands.
+/* Keyboard focus: deep gold ring on white, sign yellow inside blue bands.
    :where() keeps specificity at zero so utilities stay overridable. */
 :where(a, button, [tabindex], iframe):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
-:where(.bg-marine, footer) :where(a, button, [tabindex]):focus-visible,
-:where(.bg-marine, footer):is(a, button):focus-visible {
-  outline-color: var(--accent-bright);
+:where(.bg-blue, footer) :where(a, button, [tabindex]):focus-visible,
+:where(.bg-blue, footer):is(a, button):focus-visible {
+  outline-color: var(--yellow);
 }
 
 /* The Preisliste is the most-printed page of a salon site — the homepage

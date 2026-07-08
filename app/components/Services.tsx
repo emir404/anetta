@@ -46,7 +46,7 @@ function CategoryBlock({
         >
           {String(index + 1).padStart(2, "0")}
         </span>
-        <h3 className="font-display text-[16px] font-semibold uppercase leading-none tracking-[0.14em] [font-stretch:115%] text-foreground">
+        <h3 className="font-display text-[16px] font-semibold uppercase leading-none tracking-[0.14em] text-foreground">
           {category.name}
         </h3>
         <span
@@ -129,7 +129,7 @@ export function Services() {
         <TextLineReveal
           as="h2"
           lines={["Gutes Handwerk,", "ehrliche Preise."]}
-          className="mt-4 font-display font-semibold uppercase leading-[1.08] tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(28px,4.6vw,52px)]"
+          className="mt-4 font-display font-semibold leading-[1.06] tracking-[-0.01em] text-foreground text-[clamp(28px,4.6vw,52px)]"
         />
         <Reveal delay={0.15} className="mt-6">
           <p className="mx-auto max-w-[52ch] text-pretty text-[16px] font-medium leading-[1.65] text-foreground/80">
@@ -147,7 +147,7 @@ export function Services() {
               <CornerTicks />
               <div className="flex items-center gap-5" aria-hidden>
                 <span className="h-px flex-1 bg-accent/50" />
-                <span className="font-display text-[13px] font-semibold uppercase tracking-[0.32em] [font-stretch:115%] [text-indent:0.32em] text-accent">
+                <span className="font-display text-[13px] font-semibold uppercase tracking-[0.32em] [text-indent:0.32em] text-accent">
                   Preisliste
                 </span>
                 <span className="h-px flex-1 bg-accent/50" />
@@ -182,7 +182,7 @@ export function Services() {
               Termin vereinbaren
             </p>
             <a href={`tel:${SALON.phoneE164}`} className="group block w-fit">
-              <span className="block font-display font-semibold leading-none tracking-[0.03em] tabular-nums [font-stretch:115%] text-foreground transition-colors duration-300 group-hover:text-accent text-[clamp(24px,3.4vw,36px)]">
+              <span className="block font-display font-semibold leading-none tracking-[0.02em] tabular-nums text-foreground transition-colors duration-300 group-hover:text-accent text-[clamp(24px,3.4vw,36px)]">
                 {SALON.phoneDisplay}
               </span>
               <span
@@ -197,7 +197,7 @@ export function Services() {
         <div className="mx-auto mt-14 flex max-w-[720px] flex-col items-center gap-7 text-center">
           {["Damen", "Herren", "Kinder"].map((group) => (
             <Reveal key={group}>
-              <p className="font-display font-semibold uppercase tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(28px,4vw,40px)]">
+              <p className="font-display font-semibold tracking-[-0.01em] text-foreground text-[clamp(28px,4vw,40px)]">
                 {group}
               </p>
             </Reveal>

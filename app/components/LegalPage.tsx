@@ -26,7 +26,7 @@ export function LegalPage({
       </header>
 
       <main className="flex-1 px-6 py-16 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-24">
-        <h1 className="hyphens-auto break-words font-display font-semibold uppercase leading-[1.08] tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(26px,4.6vw,52px)]">
+        <h1 className="hyphens-auto break-words font-display font-semibold leading-[1.06] tracking-[-0.01em] text-foreground text-[clamp(26px,4.6vw,52px)]">
           {title}
         </h1>
         <div className="mt-10 flex max-w-[640px] flex-col gap-8">{children}</div>
