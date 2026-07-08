@@ -44,7 +44,7 @@ Ask Anetta Dzikowski, in this order:
 6. **Öffnungszeiten** — confirm Di–Fr 09–18, Sa 08–13 (source was a directory listing)
 7. **Walk-ins** — spontan vorbeikommen möglich, oder nur mit Termin?
 8. **Seit wann gibt es den Salon?** — founding year would enrich the story (currently unknown; the site makes no claim)
-9. **Fotos** — permission/desire to photograph the salon; until then the site uses generated ambience imagery (clearly non-portrait)
+9. **Fotos** — permission/desire to photograph the salon; the studio-provided storefront photo already ships (Der-Salon-Sektion — **confirm Freigabe on this call**, see `images/MANIFEST.md` `real/`); interiors remain generated ambience imagery (clearly non-portrait) until real photos exist
 10. **Kundenstimmen** — permission to collect and publish testimonials
 11. **Domain** — production domain decision (`SITE_URL`)
 

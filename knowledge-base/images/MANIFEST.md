@@ -8,8 +8,14 @@ Rights are unclear on all reference material. Design research and fact verificat
 
 | Item | Source | Seen | Stored |
 |---|---|---|---|
-| Storefront photo (sign „HAARSTUDIO AnettA", tagline, window phone sticker) | Google-Maps-Eintrag (user-provided screenshot in project briefing) | 2026-07-08 | not stored — view via Maps listing |
+| Storefront photo (sign „HAARSTUDIO AnettA", tagline, window phone sticker) | Google-Maps-Eintrag (user-provided screenshot in project briefing) | 2026-07-08 | superseded — a studio-provided copy now ships, see `real/` below |
 | Salon photo from 2014 (uploader „schnurzinchen") | https://www.golocal.de/luebeck/friseure/haarstudio-anetta-YUKPp/ | 2026-07-08 | not stored |
+
+## `real/` — studio-provided photos that ship
+
+| File | Source & enhancement | Used | Note |
+|---|---|---|---|
+| `real/storefront.jpg` (ships as `public/images/storefront.jpg`, 2212×1854) | Storefront photo provided by the studio in this project's briefing (2026-07-08); enhanced 2× via fal-ai/topaz/upscale/image (Standard V2, fix_compression 0.6, denoise 0.3, face_enhancement off) | Der-Salon-Sektion (groß) | The one REAL photograph on the site — alt text may state it IS the salon (the Stimmungsbild hedge applies only to generated imagery). **Freigabe der Inhaberin im Verifizierungscall bestätigen** (KB-Checkliste Punkt 9). |
 
 ## Logo artwork — client brand, ships
 
@@ -17,7 +23,7 @@ Provided by the studio in the project briefing 2026-07-08 (cleaned-up rendering 
 
 | File | What it is | Used |
 |---|---|---|
-| `generated/anetta-wordmark.png` (source of truth; ships as `public/logo/anetta-wordmark.png`, 1400×640, alpha-trimmed) | Yellow script „AnettA" wordmark, transparent background | Hero-Masthead, Footer-Brand |
+| `generated/anetta-wordmark.png` (source of truth; ships as `public/logo/anetta-wordmark.png`, 2400×1097, alpha-trimmed) | Yellow script „AnettA" wordmark, transparent background. Upscaled 2026-07-08 via fal-ai/recraft/upscale/crisp (matted on `#134792`, ~2.9×, alpha rebuilt from the original channel) | Hero-Masthead, Footer-Brand |
 | `app/icon.png` 512×512 + `app/apple-icon.png` 180×180 | Wordmark centered on `#134792` (composed with PIL from the artwork) | Favicon / Touch-Icon |
 | `generated/og-logo.jpg` (ships as `app/opengraph-image.jpg`, 1200×630) | Wordmark on `#134792` — the sign as a social card | Open-Graph-Bild |
 

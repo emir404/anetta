@@ -114,7 +114,9 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
           sticky ? "sticky bottom-0 z-0 motion-reduce:static" : ""
         }`}
       >
-        <div className="px-6 py-12 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-16">
+        {/* Extra mobile bottom padding: the fixed call bar floats over the
+            footer and must not cover the legal links */}
+        <div className="px-6 pb-28 pt-12 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-16">
           <div className="grid gap-10 sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-[1.5fr_1fr_1fr] lg:gap-x-16">
             {/* Brand */}
             <div>

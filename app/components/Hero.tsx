@@ -80,11 +80,12 @@ export function Hero() {
       data-print-hidden
       className="relative flex min-h-svh flex-col overflow-clip bg-background"
     >
-      {/* Mobile menu overlay — covers the whole hero */}
+      {/* Mobile menu overlay — fixed, reachable from any scroll position
+          (opened via the call-bar burger) */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-7 bg-background/95 lg:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-7 bg-background/95 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -116,12 +117,15 @@ export function Hero() {
             <motion.a
               href={`tel:${SALON.phoneE164}`}
               onClick={() => setMenuOpen(false)}
-              className="mt-4 flex h-12 items-center justify-center bg-yellow px-8 text-[13px] font-semibold uppercase tracking-[0.18em] text-blue"
+              className="mt-4 flex h-12 items-center justify-center gap-3 bg-yellow px-8 text-[13px] font-semibold uppercase tracking-[0.18em] text-blue"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.42, ease: EASE }}
             >
               Termin vereinbaren
+              <span className="tabular-nums tracking-[0.06em]">
+                {SALON.phoneDisplay}
+              </span>
             </motion.a>
           </motion.div>
         )}
@@ -129,40 +133,22 @@ export function Hero() {
 
       {/* The sign: royal-blue panel carrying the script wordmark */}
       <div className="relative bg-blue">
-        {/* Corner controls */}
+        {/* Corner CTA (desktop) — mobile gets the fixed call bar instead */}
         <motion.div
-          className="absolute right-6 top-6 z-20 sm:right-10 lg:right-[min(10.5vw,152px)] lg:top-10"
+          className="absolute right-6 top-6 z-20 hidden sm:right-10 lg:right-[min(10.5vw,152px)] lg:top-10 lg:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2, ease: EASE }}
         >
           <motion.a
             href={`tel:${SALON.phoneE164}`}
-            className="hidden h-11 items-center justify-center bg-yellow px-6 text-[12px] font-semibold uppercase tracking-[0.18em] text-blue lg:flex"
+            className="flex h-11 items-center justify-center bg-yellow px-6 text-[12px] font-semibold uppercase tracking-[0.18em] text-blue"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
             Termin vereinbaren
           </motion.a>
-
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 lg:hidden"
-          >
-            <motion.span
-              className={`block h-[2px] w-6 ${menuOpen ? "bg-foreground" : "bg-background"}`}
-              animate={menuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-            />
-            <motion.span
-              className={`block h-[2px] w-6 ${menuOpen ? "bg-foreground" : "bg-background"}`}
-              animate={menuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-            />
-          </button>
         </motion.div>
 
         {/* Masthead: the wordmark as it hangs over the door */}
@@ -248,6 +234,25 @@ export function Hero() {
               transition={{ duration: 1.3, delay: 0.95, ease: EASE }}
             />
           </div>
+
+          {/* The number, first altitude — on the sign like in the shop window */}
+          <motion.div
+            {...rise(1.0)}
+            className="mt-7 flex flex-col items-center gap-2"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-background/70">
+              Termin vereinbaren
+            </p>
+            <a href={`tel:${SALON.phoneE164}`} className="group block">
+              <span className="block font-display font-semibold leading-none tracking-[0.02em] tabular-nums text-background transition-colors duration-300 group-hover:text-yellow text-[clamp(28px,3.4vw,40px)]">
+                {SALON.phoneDisplay}
+              </span>
+              <span
+                aria-hidden
+                className="mt-1.5 block h-[2px] w-full origin-left scale-x-0 bg-yellow transition-transform duration-500 ease-out group-hover:scale-x-100"
+              />
+            </a>
+          </motion.div>
         </header>
 
         {/* Bottom board of the sign: hours · address · groups */}
@@ -310,6 +315,47 @@ export function Hero() {
           ))}
         </div>
       </div>
+
+      {/* Mobile call bar — the sign as a floating pill; the number never
+          leaves thumb reach. Desktop keeps the corner CTA instead. */}
+      <motion.div
+        className="fixed inset-x-4 z-50 flex items-center justify-between gap-3 rounded-full border border-yellow/60 bg-blue py-2 pl-5 pr-2 lg:hidden"
+        style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
+        initial={{ opacity: 0, y: reducedMotion ? 0 : 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.35, ease: EASE }}
+      >
+        <Image
+          aria-hidden
+          src="/logo/anetta-wordmark.png"
+          alt=""
+          width={2400}
+          height={1097}
+          className="h-5 w-auto"
+        />
+        <button
+          type="button"
+          aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+          className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5"
+        >
+          <motion.span
+            className="block h-[2px] w-6 bg-background"
+            animate={menuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+          />
+          <motion.span
+            className="block h-[2px] w-6 bg-background"
+            animate={menuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+          />
+        </button>
+        <a
+          href={`tel:${SALON.phoneE164}`}
+          className="flex h-11 shrink-0 items-center rounded-full bg-yellow px-5 text-[14px] font-semibold tabular-nums tracking-[0.04em] text-blue"
+        >
+          {SALON.phoneDisplay}
+        </a>
+      </motion.div>
     </section>
   );
 }

@@ -105,10 +105,11 @@ export function Salon() {
           </Reveal>
         </div>
 
-        {/* Image pair */}
+        {/* Image pair — the real storefront carries the section; the
+            still-life overlay quotes the sign's hairdryer illustration */}
         <div className="relative">
           <motion.div
-            className="relative aspect-[4/5] w-full max-w-[520px] overflow-clip lg:ml-auto"
+            className="relative aspect-[6/5] w-full max-w-[520px] overflow-clip lg:ml-auto"
             style={reducedMotion ? undefined : { y: photoLargeY }}
           >
             <motion.div
@@ -119,8 +120,8 @@ export function Salon() {
               transition={{ duration: 1.4 }}
             >
               <Image
-                src="/images/salon-1.jpg"
-                alt="Salonstuhl mit blauem Umhang vor dem Spiegel im hellen Tageslicht"
+                src="/images/storefront.jpg"
+                alt="Die Ladenfront des Haarstudio Anetta: blaues Schild mit gelbem AnettA-Schriftzug über den Schaufenstern"
                 fill
                 sizes="(max-width: 1024px) 100vw, 46vw"
                 className="object-cover"
