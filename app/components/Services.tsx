@@ -7,17 +7,52 @@ import {
   PRICE_FOOTNOTE,
   SERVICE_CATEGORIES,
   formatPrice,
+  type ServiceItem,
   type ServiceCategory,
 } from "../data/services";
 
-function CategoryBlock({ category }: { category: ServiceCategory }) {
+/** Price cell: the "ab" recedes so the digits carry (German list convention). */
+function PriceCell({ item }: { item: ServiceItem }) {
+  if (item.price === null) {
+    return (
+      <dd className="text-[15px] font-medium text-foreground/60">
+        auf Anfrage
+      </dd>
+    );
+  }
+  return (
+    <dd className="text-[15.5px] font-semibold tabular-nums text-accent">
+      {item.fromPrice && (
+        <span className="font-medium text-foreground/55">ab&nbsp;</span>
+      )}
+      {formatPrice({ ...item, fromPrice: false })}
+    </dd>
+  );
+}
+
+function CategoryBlock({
+  category,
+  index,
+}: {
+  category: ServiceCategory;
+  index: number;
+}) {
   return (
     <div className="break-inside-avoid pt-10 first:pt-0">
-      <div className="flex items-baseline gap-4">
-        <span aria-hidden className="h-px w-7 translate-y-[-0.35em] bg-accent" />
-        <h3 className="font-serif font-medium leading-none text-[clamp(24px,2.6vw,29px)] text-foreground">
+      <div className="flex items-baseline gap-3">
+        <span
+          aria-hidden
+          className="text-[11px] font-semibold tabular-nums tracking-[0.08em] text-accent"
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <h3 className="font-display text-[16px] font-semibold uppercase leading-none tracking-[0.14em] [font-stretch:115%] text-foreground">
           {category.name}
         </h3>
+        <span
+          aria-hidden
+          className="h-px flex-1 self-center bg-foreground/15"
+        />
       </div>
       <dl className="mt-3 divide-y divide-foreground/8">
         {category.items.map((item) => (
@@ -34,14 +69,12 @@ function CategoryBlock({ category }: { category: ServiceCategory }) {
               aria-hidden
               className="flex-1 border-b border-dotted border-foreground/25"
             />
-            <dd className="text-[15.5px] font-semibold tabular-nums text-accent">
-              {formatPrice(item)}
-            </dd>
+            <PriceCell item={item} />
           </StaggerItem>
         ))}
       </dl>
       {category.note && (
-        <p className="mt-3 text-[13px] font-medium italic leading-[1.6] text-foreground/70">
+        <p className="mt-3 text-[13px] font-medium leading-[1.6] text-foreground/65">
           {category.note}
         </p>
       )}
@@ -49,9 +82,34 @@ function CategoryBlock({ category }: { category: ServiceCategory }) {
   );
 }
 
+/** Corner ticks — die Karte as a set print sheet. */
+function CornerTicks() {
+  return (
+    <>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-accent/50"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute right-3 top-3 h-4 w-4 border-r border-t border-accent/50"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute bottom-3 left-3 h-4 w-4 border-b border-l border-accent/50"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b border-r border-accent/50"
+      />
+    </>
+  );
+}
+
 /**
- * The Preisliste as an object: a Karte laid on the page — surface sheet,
- * menu-card header, two text columns. Prints as a clean document.
+ * The Preisliste as an object: a Karte laid on the page — surface sheet with
+ * corner ticks, menu-card header, indexed categories flowing in two columns.
+ * Prints as a clean document (globals.css @media print).
  */
 export function Services() {
   const showFullList = PRICE_MODE !== "auf_anfrage";
@@ -62,14 +120,19 @@ export function Services() {
       className="bg-background px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[120px]"
     >
       {/* Centered intro */}
-      <div className="mx-auto max-w-[720px] text-center">
+      <div className="mx-auto max-w-[760px] text-center">
+        <Reveal y={12}>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-accent">
+            Leistungen
+          </p>
+        </Reveal>
         <TextLineReveal
           as="h2"
           lines={["Gutes Handwerk,", "ehrliche Preise."]}
-          className="font-serif font-medium leading-[1.05] tracking-[-0.01em] text-foreground text-[clamp(38px,5.5vw,60px)]"
+          className="mt-4 font-display font-semibold uppercase leading-[1.08] tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(28px,4.6vw,52px)]"
         />
         <Reveal delay={0.15} className="mt-6">
-          <p className="text-pretty text-[16px] font-medium leading-[1.65] text-foreground/80">
+          <p className="mx-auto max-w-[52ch] text-pretty text-[16px] font-medium leading-[1.65] text-foreground/80">
             Vom klassischen Schnitt bis zur Dauerwelle — bei uns finden Damen,
             Herren und Kinder alles, was gutes Haar braucht.
           </p>
@@ -80,39 +143,52 @@ export function Services() {
         <>
           {/* Die Karte */}
           <Reveal y={36} amount={0.1} className="mx-auto mt-14 max-w-[920px]">
-            <div className="border border-foreground/10 bg-surface px-6 py-10 sm:px-12 sm:py-14">
+            <div className="relative border border-foreground/15 bg-surface px-6 py-10 sm:px-12 sm:py-14">
+              <CornerTicks />
               <div className="flex items-center gap-5" aria-hidden>
                 <span className="h-px flex-1 bg-accent/50" />
-                <span className="text-[12px] font-semibold uppercase tracking-[0.32em] text-accent">
+                <span className="font-display text-[13px] font-semibold uppercase tracking-[0.32em] [font-stretch:115%] [text-indent:0.32em] text-accent">
                   Preisliste
                 </span>
                 <span className="h-px flex-1 bg-accent/50" />
               </div>
 
-              <Stagger stagger={0.05} amount={0.05} className="mt-8 xl:columns-2 xl:gap-14">
-                {SERVICE_CATEGORIES.map((category) => (
-                  <CategoryBlock key={category.name} category={category} />
+              <Stagger
+                stagger={0.05}
+                amount={0.05}
+                className="mt-9 xl:columns-2 xl:gap-16"
+              >
+                {SERVICE_CATEGORIES.map((category, i) => (
+                  <CategoryBlock
+                    key={category.name}
+                    category={category}
+                    index={i}
+                  />
                 ))}
               </Stagger>
 
-              <p className="mt-10 border-t border-foreground/10 pt-6 text-pretty text-center text-[13px] font-medium italic leading-[1.6] text-foreground/70">
+              <p className="mt-10 border-t border-foreground/10 pt-6 text-pretty text-center text-[13px] font-medium leading-[1.6] text-foreground/70">
                 {PRICE_FOOTNOTE}
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="mt-9 text-center" >
-            <a
-              href={`tel:${SALON.phoneE164}`}
-              className="group inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent"
-            >
-              Termin vereinbaren — {SALON.phoneDisplay}
+          {/* Phone, second altitude of three: quiet label, the number carries */}
+          <Reveal
+            delay={0.1}
+            className="mt-12 flex flex-col items-center gap-2.5 text-center"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-foreground/60">
+              Termin vereinbaren
+            </p>
+            <a href={`tel:${SALON.phoneE164}`} className="group block w-fit">
+              <span className="block font-display font-semibold leading-none tracking-[0.03em] tabular-nums [font-stretch:115%] text-foreground transition-colors duration-300 group-hover:text-accent text-[clamp(24px,3.4vw,36px)]">
+                {SALON.phoneDisplay}
+              </span>
               <span
                 aria-hidden
-                className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
-              >
-                →
-              </span>
+                className="mt-1.5 block h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100"
+              />
             </a>
           </Reveal>
         </>
@@ -121,7 +197,7 @@ export function Services() {
         <div className="mx-auto mt-14 flex max-w-[720px] flex-col items-center gap-7 text-center">
           {["Damen", "Herren", "Kinder"].map((group) => (
             <Reveal key={group}>
-              <p className="font-serif font-medium text-[clamp(32px,4.5vw,44px)] text-foreground">
+              <p className="font-display font-semibold uppercase tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(28px,4vw,40px)]">
                 {group}
               </p>
             </Reveal>
@@ -131,7 +207,7 @@ export function Services() {
               Preise und Termine erfragen Sie gern telefonisch unter{" "}
               <a
                 href={`tel:${SALON.phoneE164}`}
-                className="font-semibold text-accent"
+                className="font-semibold tabular-nums text-accent"
               >
                 {SALON.phoneDisplay}
               </a>

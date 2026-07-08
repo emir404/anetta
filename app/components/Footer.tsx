@@ -13,7 +13,7 @@ import {
 } from "motion/react";
 import { useReducedMotionSafe } from "./Reveal";
 import { HOURS_SUMMARY } from "../data/openingHours";
-import { SALON } from "../data/salon";
+import { SALON, MAPS_URL } from "../data/salon";
 
 // Trailing NBSP: a plain trailing space collapses at the span boundary and
 // the loop copies would butt together ("Lübeck ·Damen").
@@ -59,7 +59,7 @@ function VelocityMarquee() {
           {[0, 1, 2, 3].map((i) => (
             <span
               key={i}
-              className="shrink-0 font-serif italic font-medium leading-none tracking-[-0.01em] text-foreground text-[clamp(28px,4.5vw,52px)]"
+              className="shrink-0 font-display font-semibold uppercase leading-none tracking-[0.08em] [font-stretch:115%] text-foreground text-[clamp(22px,3.6vw,42px)]"
             >
               {MARQUEE_TEXT}
             </span>
@@ -102,7 +102,7 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
     <>
       {/* Marquee strip — stays in the ivory page flow above the footer curtain */}
       {curtain && (
-        <div className="relative z-10 bg-background">
+        <div data-print-hidden className="relative z-10 bg-background">
           <VelocityMarquee />
         </div>
       )}
@@ -130,7 +130,7 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
                 </span>
                 <span
                   aria-hidden
-                  className="font-serif italic font-medium leading-[1.05] text-background text-[44px]"
+                  className="font-display font-semibold uppercase leading-[1.15] tracking-[0.06em] [font-stretch:115%] text-background text-[34px]"
                 >
                   Anetta
                 </span>
@@ -138,8 +138,15 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
               <p className="mt-5 max-w-[36ch] text-[14px] font-medium leading-[1.6] text-background/70">
                 Der freundliche Damen-, Herren- und Kinderfriseur
                 <br />
-                {SALON.street}, {SALON.postalCode} {SALON.city} ·{" "}
-                {SALON.locality}
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-background/40 underline-offset-4 transition-opacity hover:opacity-60"
+                >
+                  {SALON.street}, {SALON.postalCode} {SALON.city} ·{" "}
+                  {SALON.locality}
+                </a>
               </p>
             </div>
 
@@ -185,8 +192,8 @@ export function Footer({ curtain = true }: { curtain?: boolean }) {
 
           {/* Bottom bar */}
           <div className="mt-12 flex flex-col gap-4 border-t border-background/20 pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-16">
-            <p className="text-[13px] font-semibold text-background/60">
-              © {new Date().getFullYear()} Haarstudio Anetta
+            <p className="text-[13px] font-semibold tabular-nums text-background/60">
+              © {new Date().getFullYear()} Haarstudio Anetta · Lübeck
             </p>
             <div className="flex items-center gap-6 text-[13px] font-semibold">
               <Link

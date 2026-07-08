@@ -18,13 +18,13 @@ export function Termin() {
       <header className="flex items-center justify-between px-6 pt-8 sm:px-10 lg:px-[min(10.5vw,152px)] lg:pt-14">
         <Link
           href="/"
-          className="py-2 text-[13px] font-semibold uppercase tracking-[0.24em] text-foreground"
+          className="flex min-h-11 items-center py-2 text-[13px] font-semibold uppercase tracking-[0.24em] text-foreground"
         >
           Haarstudio&nbsp;Anetta
         </Link>
         <Link
           href="/"
-          className="py-2 text-[13px] font-semibold tracking-[-0.13px] text-foreground/70 transition-opacity hover:opacity-70"
+          className="flex min-h-11 items-center py-2 text-[13px] font-semibold tracking-[-0.13px] text-foreground/70 transition-opacity hover:opacity-70"
         >
           ← Zurück zur Startseite
         </Link>
@@ -43,7 +43,7 @@ export function Termin() {
               <TextLineReveal
                 as="h1"
                 lines={["Termin", "vereinbaren"]}
-                className="mt-3 font-serif font-medium leading-[1.02] tracking-[-0.01em] text-foreground text-[clamp(44px,7vw,84px)]"
+                className="mt-3 font-display font-semibold uppercase leading-[1.08] tracking-[0.05em] [font-stretch:115%] text-foreground text-[clamp(32px,5.5vw,64px)]"
               />
 
               <Reveal delay={0.15} className="mt-8 max-w-[460px]">
@@ -80,7 +80,7 @@ export function Termin() {
                       },
                     }}
                   >
-                    <span className="block whitespace-nowrap font-serif font-medium leading-[1.02] tabular-nums text-foreground transition-colors duration-500 group-hover:text-accent text-[clamp(40px,7vw,96px)]">
+                    <span className="block whitespace-nowrap font-display font-semibold leading-[1.02] tracking-[0.02em] tabular-nums [font-stretch:115%] text-foreground transition-colors duration-500 group-hover:text-accent text-[clamp(36px,5.8vw,72px)]">
                       0451&nbsp;79&nbsp;14&nbsp;67
                     </span>
                     <span
@@ -91,10 +91,15 @@ export function Termin() {
                 </motion.span>
 
                 <Reveal delay={0.15} className="mt-6">
-                  <p className="text-[14px] font-medium text-foreground/70">
+                  <a
+                    href={MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-fit text-[14px] font-medium text-foreground/70 underline decoration-foreground/30 underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground"
+                  >
                     {SALON.street}, {SALON.postalCode} {SALON.city} ·{" "}
                     {SALON.locality}
-                  </p>
+                  </a>
                 </Reveal>
               </div>
             </div>
@@ -117,7 +122,7 @@ export function Termin() {
                     src="/images/salon-1.jpg"
                     alt="Salonstuhl vor dem Spiegel im warmen Abendlicht"
                     fill
-                    priority
+                    preload
                     sizes="(max-width: 1024px) 100vw, 42vw"
                     className="object-cover"
                   />
@@ -131,7 +136,7 @@ export function Termin() {
         <section className="px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-28">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Reveal>
-              <h2 className="text-[18px] font-semibold uppercase tracking-[0.14em] text-foreground">
+              <h2 className="font-display text-[18px] font-semibold uppercase tracking-[0.14em] [font-stretch:115%] text-foreground">
                 Öffnungszeiten
               </h2>
             </Reveal>
@@ -182,7 +187,7 @@ export function Termin() {
                   {isToday && (
                     <motion.span
                       aria-hidden
-                      className="absolute bottom-0 left-0 top-0 w-1 bg-accent"
+                      className="absolute bottom-0 left-0 top-0 w-0.5 bg-accent"
                       initial={{ scaleY: 0 }}
                       whileInView={{ scaleY: 1 }}
                       viewport={{ once: true }}
@@ -218,7 +223,7 @@ export function Termin() {
                 <iframe
                   src={MAPS_EMBED_URL}
                   title="Haarstudio Anetta auf Google Maps – Kronsforder Allee 3a, 23560 Lübeck"
-                  className="absolute inset-0 h-full w-full border-0 grayscale-[0.35] contrast-[0.95]"
+                  className="absolute inset-0 h-full w-full border-0 grayscale-[0.35] contrast-[0.95] sepia-[0.08]"
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
@@ -227,7 +232,7 @@ export function Termin() {
             </Reveal>
 
             <motion.div
-              className="relative -mt-8 ml-4 mr-4 border-l-4 border-accent bg-surface p-6 shadow-2xl sm:absolute sm:bottom-8 sm:left-8 sm:ml-0 sm:mr-0 sm:mt-0 sm:max-w-[360px]"
+              className="relative -mt-8 ml-4 mr-4 border border-l-2 border-foreground/12 border-l-accent bg-background p-6 shadow-2xl sm:absolute sm:bottom-8 sm:left-8 sm:ml-0 sm:mr-0 sm:mt-0 sm:max-w-[360px]"
               initial={{
                 opacity: 0,
                 y: reducedMotion ? 0 : 60,
@@ -240,11 +245,16 @@ export function Termin() {
               <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-foreground">
                 Haarstudio Anetta
               </p>
-              <p className="mt-2 text-[15px] font-medium leading-[1.6] text-foreground/80">
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 block w-fit text-[15px] font-medium leading-[1.6] text-foreground/80 underline decoration-foreground/30 underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground"
+              >
                 {SALON.street}
                 <br />
                 {SALON.postalCode} {SALON.city} · {SALON.locality}
-              </p>
+              </a>
               <a
                 href={MAPS_URL}
                 target="_blank"

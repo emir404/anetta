@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
-import { Cormorant, Hanken_Grotesk } from "next/font/google";
+import { Archivo, Hanken_Grotesk } from "next/font/google";
+import { Agentation } from "agentation";
 import "./globals.css";
 import { SmoothScroll } from "./components/SmoothScroll";
 import { SITE_URL } from "./data/salon";
 
-// DESIGN.md §4.1 — display serif, never below 24px; italics are the emphasis voice.
-const cormorant = Cormorant({
-  variable: "--font-cormorant",
+// DESIGN.md §4.1 (v3) — modern display grotesk; the wdth axis carries the
+// wordmark's semi-expanded voice. No italics anywhere in the sans contract.
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  axes: ["wdth"],
 });
 
 // Warm humanist grotesk — body, UI, tracked micro-labels.
 const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken",
   subsets: ["latin"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -44,10 +45,11 @@ export default function RootLayout({
   return (
     <html
       lang="de"
-      className={`${cormorant.variable} ${hankenGrotesk.variable} h-full antialiased`}
+      className={`${archivo.variable} ${hankenGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
+        {process.env.NODE_ENV === "development" && <Agentation />}
       </body>
     </html>
   );

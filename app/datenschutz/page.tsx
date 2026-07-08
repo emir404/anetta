@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 // Formulare, Schriften lokal (next/font). Einzige externe Einbindung: Google Maps.
 export default function DatenschutzPage() {
   return (
-    <LegalPage title="Datenschutzerklärung">
+    // Soft hyphen steers the caps-H1 break to the compound boundary
+    // (DATENSCHUTZ-ERKLÄRUNG); the <title> above stays clean.
+    <LegalPage title={"Datenschutz­erklärung"}>
       <LegalSection heading="Verantwortliche">
         <p>
           Anetta Dzikowski

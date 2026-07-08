@@ -20,12 +20,17 @@
   --color-marine: var(--marine);
   --color-accent: var(--accent);
   --color-accent-bright: var(--accent-bright);
-  --font-sans: var(--font-hanken);
-  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-hanken), system-ui, sans-serif;
+  --font-display: var(--font-archivo), var(--font-hanken), system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Anchored sections breathe below the viewport edge on arrival. */
+:target {
+  scroll-margin-top: 2.5rem;
 }
 
 html.lenis {
@@ -49,8 +54,19 @@ body {
   color: var(--marine);
 }
 
-/* The Preisliste is the most-printed page of a salon site — let it print
-   as a clean document: chrome off, ink on paper. */
+/* Keyboard focus: brass ring on ivory, bright brass inside dark bands.
+   :where() keeps specificity at zero so utilities stay overridable. */
+:where(a, button, [tabindex], iframe):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+:where(.bg-marine, footer) :where(a, button, [tabindex]):focus-visible,
+:where(.bg-marine, footer):is(a, button):focus-visible {
+  outline-color: var(--accent-bright);
+}
+
+/* The Preisliste is the most-printed page of a salon site — the homepage
+   prints as that one document: chrome off, ink on paper. */
 @media print {
   header,
   footer,
@@ -61,5 +77,12 @@ body {
   body {
     background: #fff;
     color: #000;
+  }
+  #leistungen,
+  #leistungen * {
+    color: #000 !important;
+    background: #fff !important;
+    border-color: rgba(0, 0, 0, 0.35) !important;
+    box-shadow: none !important;
   }
 }

@@ -18,13 +18,14 @@ export function Contact() {
   return (
     <section
       id="kontakt"
+      data-print-hidden
       className="bg-background px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[140px]"
     >
       <div className="flex flex-wrap items-end justify-between gap-x-16 gap-y-6">
         <TextLineReveal
           as="h2"
           lines={["Kontakt &", "Termin"]}
-          className="font-serif font-medium leading-[1.05] tracking-[-0.01em] text-foreground text-[clamp(38px,5.5vw,60px)]"
+          className="font-display font-semibold uppercase leading-[1.08] tracking-[0.06em] [font-stretch:115%] text-foreground text-[clamp(28px,4.6vw,52px)]"
         />
         <Reveal delay={0.1}>
           <p className="max-w-[38ch] text-pretty pb-2 text-[15px] font-medium leading-[1.6] text-foreground/75">
@@ -35,9 +36,10 @@ export function Contact() {
       </div>
 
       <div className="mt-12 grid lg:mt-16 lg:grid-cols-[minmax(0,46%)_1fr]">
-        {/* Terminkarte */}
+        {/* Terminkarte — the marine plate with the brass hairline frame,
+            the storefront sign's grammar as a contact card */}
         <motion.div
-          className="bg-marine p-8 text-background sm:p-12 lg:p-14"
+          className="border border-accent-bright/25 bg-marine p-8 text-background sm:p-12 lg:p-14"
           initial={{ opacity: 0, y: reducedMotion ? 0 : 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -51,7 +53,7 @@ export function Contact() {
             href={`tel:${SALON.phoneE164}`}
             className="group mt-5 block w-fit"
           >
-            <span className="block whitespace-nowrap font-serif font-medium leading-none tabular-nums text-background transition-colors duration-500 group-hover:text-accent-bright text-[clamp(36px,4.8vw,64px)]">
+            <span className="block whitespace-nowrap font-display font-semibold leading-none tracking-[0.02em] tabular-nums [font-stretch:115%] text-background transition-colors duration-500 group-hover:text-accent-bright text-[clamp(34px,4.4vw,58px)]">
               0451&nbsp;79&nbsp;14&nbsp;67
             </span>
             <span
@@ -85,7 +87,7 @@ export function Contact() {
           )}
 
           {/* Hours — quiet rows, gold dot marks today */}
-          <div id="oeffnungszeiten" className="mt-10">
+          <div id="oeffnungszeiten" className="mt-10 scroll-mt-10">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-bright">
               Öffnungszeiten
             </h3>
@@ -128,10 +130,15 @@ export function Contact() {
 
           {/* Address + links */}
           <div className="mt-10 flex flex-col gap-4">
-            <p className="text-[15px] font-medium leading-[1.6] text-background/85">
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-fit text-[15px] font-medium leading-[1.6] text-background/85 underline decoration-background/40 underline-offset-4 transition-colors hover:text-background hover:decoration-background"
+            >
               {SALON.street}, {SALON.postalCode} {SALON.city} ·{" "}
               {SALON.locality}
-            </p>
+            </a>
             <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
               <a
                 href={MAPS_URL}
@@ -169,11 +176,11 @@ export function Contact() {
           amount={0.15}
           className="relative min-h-[380px] lg:mr-[calc(min(10.5vw,152px)*-1)]"
         >
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 border border-foreground/12 lg:border-r-0">
             <iframe
               src={MAPS_EMBED_URL}
               title="Haarstudio Anetta auf Google Maps – Kronsforder Allee 3a, 23560 Lübeck"
-              className="absolute inset-0 h-full w-full border-0 grayscale-[0.35] contrast-[0.95]"
+              className="absolute inset-0 h-full w-full border-0 grayscale-[0.35] contrast-[0.95] sepia-[0.08]"
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"

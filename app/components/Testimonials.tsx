@@ -14,6 +14,7 @@ export function Testimonials() {
   return (
     <section
       id="stimmen"
+      data-print-hidden
       className="bg-background px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[120px]"
     >
       <Reveal y={16}>
@@ -29,10 +30,11 @@ export function Testimonials() {
         {TESTIMONIALS.map((testimonial) => (
           <StaggerItem key={testimonial.quote} y={28}>
             <figure className="flex h-full flex-col justify-between border border-foreground/10 bg-surface p-8">
-              <blockquote className="font-serif italic font-medium leading-[1.35] text-foreground text-[clamp(20px,2vw,24px)]">
+              <blockquote className="text-pretty text-[16.5px] font-medium leading-[1.6] text-foreground/90">
                 „{testimonial.quote}“
               </blockquote>
-              <figcaption className="mt-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+              <figcaption className="mt-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+                <span aria-hidden className="h-px w-6 bg-accent/60" />
                 {testimonial.attribution}
               </figcaption>
             </figure>

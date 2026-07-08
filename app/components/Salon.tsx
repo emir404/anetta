@@ -12,10 +12,11 @@ import {
 } from "./Reveal";
 import { SALON, MAPS_URL } from "../data/salon";
 
-const INFO = [
+const INFO: { label: string; lines: [string, string]; href?: string }[] = [
   {
     label: "Lage",
     lines: [SALON.street, `${SALON.postalCode} ${SALON.city} · ${SALON.locality}`],
+    href: MAPS_URL,
   },
   {
     label: "Für alle",
@@ -26,6 +27,18 @@ const INFO = [
     lines: ["telefonisch unter", SALON.phoneDisplay],
   },
 ];
+
+/** Timetable cell index — same quiet numbering voice as the Preisliste. */
+function CellIndex({ n }: { n: number }) {
+  return (
+    <span
+      aria-hidden
+      className="text-[11px] font-semibold tabular-nums tracking-[0.08em] text-accent-bright/70"
+    >
+      {String(n).padStart(2, "0")}
+    </span>
+  );
+}
 
 export function Salon() {
   const ref = useRef<HTMLElement>(null);
@@ -44,12 +57,13 @@ export function Salon() {
     <section
       id="salon"
       ref={ref}
+      data-print-hidden
       className="relative overflow-clip bg-marine px-6 py-20 text-background sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[130px]"
     >
       {/* Ghost place-name */}
       <motion.p
         aria-hidden
-        className="pointer-events-none absolute -left-[3vw] bottom-2 select-none font-serif italic font-medium leading-none text-transparent text-[clamp(110px,20vw,300px)]"
+        className="pointer-events-none absolute -left-[3vw] bottom-2 select-none font-display font-semibold leading-none tracking-[-0.01em] text-transparent text-[clamp(110px,20vw,300px)]"
         style={{
           WebkitTextStroke: "1.5px rgba(246,241,231,0.07)",
           y: reducedMotion ? 0 : ghostY,
@@ -69,17 +83,17 @@ export function Salon() {
 
           <TextLineReveal
             as="h2"
-            lines={["Am Mühlentor,", "mitten in Lübeck."]}
-            className="mt-5 font-serif font-medium leading-[1.05] tracking-[-0.01em] text-background text-[clamp(38px,5.5vw,60px)]"
+            lines={["Am Mühlentor,", "mitten in", "Lübeck."]}
+            className="mt-4 font-display font-semibold uppercase leading-[1.08] tracking-[0.06em] [font-stretch:115%] text-background text-[clamp(28px,4.6vw,52px)]"
           />
 
-          <Reveal delay={0.15} className="mt-9 max-w-[46ch]">
-            <p className="text-pretty text-[16px] font-medium leading-[1.65] text-background/80 sm:text-[17px]">
+          <Reveal delay={0.15} className="mt-8 max-w-[46ch]">
+            <p className="hyphens-auto text-pretty text-[16px] font-medium leading-[1.65] text-background/80 sm:text-[17px]">
               Dort, wo die Lübecker Altstadt in die Kronsforder Allee
               übergeht, liegt das Haarstudio Anetta — mit dem Mühlentor vor
               der Tür und dem Viertel im Herzen.
             </p>
-            <p className="mt-5 text-pretty text-[16px] font-medium leading-[1.65] text-background/80 sm:text-[17px]">
+            <p className="mt-5 hyphens-auto text-pretty text-[16px] font-medium leading-[1.65] text-background/80 sm:text-[17px]">
               Ein Salon zum Wohlfühlen: herzlich, persönlich und
               unkompliziert. Alle Generationen sind willkommen — von der
               ersten Ponyfrisur bis zur Dauerwelle.
@@ -127,8 +141,11 @@ export function Salon() {
             </motion.div>
           </motion.div>
 
+          {/* Knockout frame in the ground color separates the overlap —
+              flat v3 geometry, no shadow (§4.3: shadows only on the
+              floating map card). */}
           <motion.div
-            className="relative -mt-14 mr-auto aspect-[3/2] w-[74%] max-w-[420px] overflow-clip shadow-2xl lg:absolute lg:-left-20 lg:bottom-8 lg:mt-0 lg:w-[62%]"
+            className="relative -mt-14 mr-auto aspect-[3/2] w-[74%] max-w-[420px] overflow-clip border-[6px] border-marine lg:absolute lg:-left-20 lg:bottom-8 lg:mt-0 lg:w-[62%]"
             style={reducedMotion ? undefined : { y: photoSmallY }}
           >
             <motion.div
@@ -155,16 +172,30 @@ export function Salon() {
         className="relative mt-16 grid divide-y divide-background/15 border-y border-background/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:mt-20"
         stagger={0.12}
       >
-        {INFO.map((item) => (
+        {INFO.map((item, i) => (
           <StaggerItem key={item.label} y={18} className="px-1 py-7 sm:px-8">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-bright">
+            <p className="flex items-baseline gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-bright">
+              <CellIndex n={i + 1} />
               {item.label}
             </p>
-            <p className="mt-3 text-[14.5px] font-medium leading-[1.55] text-background/85 tabular-nums">
-              {item.lines[0]}
-              <br />
-              {item.lines[1]}
-            </p>
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 block w-fit text-[14.5px] font-medium leading-[1.55] text-background/85 tabular-nums underline decoration-background/40 underline-offset-4 transition-colors hover:text-background hover:decoration-background"
+              >
+                {item.lines[0]}
+                <br />
+                {item.lines[1]}
+              </a>
+            ) : (
+              <p className="mt-3 text-[14.5px] font-medium leading-[1.55] text-background/85 tabular-nums">
+                {item.lines[0]}
+                <br />
+                {item.lines[1]}
+              </p>
+            )}
           </StaggerItem>
         ))}
       </Stagger>

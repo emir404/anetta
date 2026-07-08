@@ -46,21 +46,21 @@ Method: 12+ live sites analyzed (WebFetch + shipped-CSS inspection for real type
 
 **Adopt:** three-voice type system with serif centerpiece and italic-word emphasis · two-step warm ivory ground + soft ink + accent-as-seasoning · one inverted marine band mid-page · ≤5 German nav items · words-first ivory hero with hours/address as hero furniture · Preisliste as typographic set-piece with `39,–` digits and one italic footnote · „Termin vereinbaren" phone staging at three altitudes (header, price list, closing section at hero scale) · house motion kit only, slow, reduced-motion-branched · Impressum/Datenschutz separate links · print stylesheet for the Preisliste.
 
-**Reject:** commerce chrome, booking widgets, hidden prices, PDF price lists, stylist-tier price matrices (single-owner salon), all-caps sentences in German, red/black shouting, marquee-mania (one slow footer marquee only), autoplay media, cookie banner (nothing to consent to), Du register, „seit 19xx" claims (unverified for this client), generated portraits or haircut-result photos (biggest AI tells; ambience only).
+**Reject:** commerce chrome, booking widgets, hidden prices, PDF price lists, stylist-tier price matrices (single-owner salon), all-caps sentences in German **body copy** (v3 exception: display headlines/wordmark set in caps by client direction — never running text), red/black shouting, marquee-mania (one slow footer marquee only), autoplay media, cookie banner (nothing to consent to), Du register, „seit 19xx" claims (unverified for this client), generated portraits or haircut-result photos (biggest AI tells; ambience only).
 
 ## 3. Why this direction is honest to THIS client
 
-The storefront sign is deep blue with yellow lettering, a script "AnettA", retro hairdryer illustrations, and the self-description „Der freundliche Damen- Herren- und Kinderfriseur". The site translates rather than replaces it: the blue becomes marine ink, the yellow becomes honeyed brass, the script becomes a serif italic, and „freundlich" becomes the emphasized word of the hero. Luxury register, neighborhood truth.
+The storefront sign is deep blue with yellow lettering, a script "AnettA", retro hairdryer illustrations, and the self-description „Der freundliche Damen- Herren- und Kinderfriseur". The site translates rather than replaces it: the blue becomes marine ink, the yellow becomes honeyed brass. (v2 translated the script as a serif italic; v3, client-directed, sets the name in a modern semi-expanded grotesk — the sign's spirit now carried by the palette, the imagery warmth, and the brass accent word in the sign quote.) Luxury register, neighborhood truth.
 
 ## 4. The spec
 
 ### 4.1 Type system
-- **Display serif — Cormorant** (`next/font/google`, variable wght 300–700 + true italics). High-contrast garalde: European heritage with glamour, spectacular ≥28px. **Hard rule: never below 24px** (hairlines get fragile) — small sizes belong to the sans. Weights: 500 display / 600 for mid-size headings. Italic = emphasis voice (single words inside roman lines; the salon name „Anetta").
-- **Text grotesk — Hanken Grotesk** (variable wght + italics). Warm, humanist, disappears next to Cormorant. Body 17px/1.65 at weight 430–500; UI labels 500–600.
+- **Display grotesk — Archivo** (`next/font/google`, variable wght + `wdth` axis) — v3, client-directed 2026-07-08; supersedes the v2 Cormorant serif contract. The width axis IS the display voice: wordmark, section H2s and display digits at `[font-stretch:115%]`, caps, positive tracking (0.02–0.08em by size). Weight 600 display / 500 quotes. **No italics anywhere** — emphasis moves to the accent color and weight.
+- **Text grotesk — Hanken Grotesk** (variable wght). Warm, humanist, disappears next to Archivo. Body 17px/1.65 at weight 430–500; UI labels 500–600. Unchanged from v2.
 - **Micro-label voice**: Hanken 11–13px, 600, uppercase, `tracking [0.22em–0.3em]`, usually accent-colored. Eyebrows, nav, buttons, table headers.
 - **Numbers**: `tabular-nums` for prices, hours, phone.
-- CSS variables: `--font-serif` (Cormorant), `--font-sans` (Hanken Grotesk) — house contract.
-- Scale: hero display `clamp(3rem, 9.5vw, 8.5rem)` / leading 0.98; section H2 `clamp(2.5rem, 5.5vw, 4.25rem)` / leading 1.05; tel-headline `clamp(2.75rem, 8.5vw, 7.5rem)`; body 17px; micro 11–13px. German compounds: `hyphens-auto` on body copy, display lines broken by hand (`TextLineReveal` lines array).
+- CSS variables: `--font-display` (Archivo), `--font-sans` (Hanken Grotesk) — house contract.
+- Scale: hero wordmark `clamp(52px, 11vw, 150px)` / leading 1; section H2 (caps, `[font-stretch:115%]`, tracking 0.06em) `clamp(30px, 4.6vw, 52px)` / leading 1.08; sign-quote interlude `clamp(28px, 5.2vw, 60px)`; Terminkarte tel `clamp(34px, 4.4vw, 58px)`, `/termin` tel `clamp(36px, 5.8vw, 72px)`; body 17px; micro 11–13px. Caps stay safe in German because every display line is short and hand-broken (`TextLineReveal` lines array); body copy carries `hyphens-auto`.
 
 ### 4.2 Color tokens (globals.css `:root` → `@theme inline`)
 | Token | Value | Role |
@@ -74,35 +74,37 @@ The storefront sign is deep blue with yellow lettering, a script "AnettA", retro
 Usage discipline: accent never fills, never button grounds. Buttons = 1px ink border or ink fill with ivory text. `::selection`: accent-bright ground, marine text.
 
 ### 4.3 Space, radii, shadows
-- Section envelope (house): `px-6 sm:px-10 lg:px-[min(10.5vw,152px)]`, `py-20 lg:py-[120px]`; price-list column `max-w-[760px]`; prose `max-w-[52ch]`.
+- Section envelope (house): `px-6 sm:px-10 lg:px-[min(10.5vw,152px)]`, `py-20 lg:py-[120px]`; Preisliste sheet `max-w-[920px]`; prose `max-w-[46–52ch]`.
 - Radius: 0 everywhere (heritage sharpness); `rounded-full` only for the open/closed pill dot.
-- Shadows: only the floating map card (`shadow-2xl`, house) — nothing else.
+- Shadows: only the `/termin` floating map card (`shadow-2xl`, house) — nothing else. Overlapping images separate via a knockout border in the ground color (Salon pair: `border-[6px] border-marine`), not shadow.
 - Rules: 1px lines at 12–15% ink; gold hairlines at full accent, one per section max.
+- Crafted details (each device once): Preisliste corner ticks (`accent/50`, print-sheet register) · About passe-partout mat (`bg-surface` + hairline, caption row) · Terminkarte brass hairline frame (`border-accent-bright/25` — the sign plate) · index numerals (11px tabular accent) only on Preisliste categories and Salon timetable cells.
+- Keyboard focus (globals): 2px brass outline, 4px offset; bright brass inside marine bands. Anchors get `scroll-margin-top` via `:target`.
 
 ### 4.4 Motion budget (house kit, nothing new)
 `Reveal` rises · `TextLineReveal` clip-mask headlines · `Stagger` lists · hours flip-board · ONE slow velocity marquee above the footer · hovers: color→accent 200–500ms, underline scale-x, image scale ≤1.04. Everything branches on `useReducedMotionSafe()`. Lenis smooth scroll. No parallax beyond the house ghost-heading/photo drifts; no autoplay media.
 
-### 4.5 Section architecture (homepage spine — v2, every section its own compositional shape)
-1. **Hero** `image-led` — full-bleed generated salon interior under `bg-marine/75`, ivory statement „Der *freundliche* Friseur am Mühlentor." (italic word in accent-bright — the sign's yellow word on blue), **snip device**: line-art scissors glyph does a small snip, then a gold hairline draws out of its blades; support line, ivory CTA + Preisliste anchor; bottom info bar (hours · address · groups).
-2. **Preisliste** `object` `#leistungen` — centered serif intro, then **die Karte**: a bordered surface sheet with „PREISLISTE" between flanking hairlines, categories flowing in two columns (xl), dot-leader rows with `39,–` digits in accent, centered italic footnote inside the sheet; phone line beneath. Prints as a document.
-3. **Über Anetta** `arch-split` `#ueber-anetta` — the **mirror-arch**: 4:5 image in a `rounded-t-full` frame with a hairline gold border (the salon-mirror motif), text right; honest copy, phone link.
-4. **Sign quote** `interlude` — surface band, the storefront tagline quoted verbatim in centered serif italic, gold rule, tracked caption. Editorial beat between light and dark.
-5. **Der Salon** `dark-band` `#salon` — marine, ghost italic „Lübeck" outline, story copy + image pair with parallax, then a **timetable strip**: Lage / Für alle / Termine as bordered, divided cells full-width.
-6. **Stimmen** — renders `null` until verified quotes exist.
-7. **Kontakt & Termin** `split-object` `#kontakt` — header row (serif H2 + side note), then a **marine Terminkarte** (eyebrow, tel at display scale, open/closed pill, quiet hours rows with a gold dot on today, address + links) beside the **map bleeding to the right viewport edge**. No floating card, no flip board (the flip board lives on `/termin` only — pages differ too).
-8. **Footer** — serif-italic marquee, marine ground, wordmark block, contact + hours columns, Impressum/Datenschutz. Curtain reveal.
+### 4.5 Section architecture (homepage spine — v3, every section its own compositional shape)
+1. **Hero** `masthead` (v3, client-directed after LATHR reference) — solid `bg-marine`, centered wordmark at display scale („HAARSTUDIO" micro-caps over „ANETTA" in Archivo caps, `[font-stretch:115%]`, clamp 52–150px), gold kicker „Friseur in Lübeck · am Mühlentor", centered nav row (lg), **snip device** beneath (scissors + gold hairline — the glyph's one appearance), then a **4-column service rail**: 2:3 editorial still lifes (Damen / Herren / Kinder / Farbe & Strähnen), each a link into `#leistungen`, tracked-caps label over a marine scrim; 2×2 on mobile; ivory `tel:` button top-right (lg) / hamburger (mobile); bottom info bar (hours · address→Maps, underlined · groups) kept from v2.
+2. **Preisliste** `object` `#leistungen` — centered display-caps intro (eyebrow „LEISTUNGEN"), then **die Karte**: a bordered surface sheet with corner ticks, „PREISLISTE" between flanking hairlines, categories indexed `01–06` (caps display names, trailing hairline) flowing in two columns (xl), dot-leader rows with `39,–` digits in accent („ab" recedes in ink/55), footnote row inside the sheet; beneath, the phone at its second altitude — quiet tracked label over the number at `clamp(24px,3.4vw,36px)` with an underline-grow hover. Prints as a document (print CSS forces the sheet to ink-on-white and hides everything else).
+3. **Über Anetta** `mat-split` `#ueber-anetta` — the **matted print**: 4:5 image in a `bg-surface` passe-partout with hairline border and a caption row (micro-caps + gold tick) — a framed photograph off the salon wall; text right: honest copy, then a **facts ledger** (Inhaberin / Für / Termine as hairline dl-rows, tel row linked — replaces the loose phone link).
+4. **Sign quote** `interlude` — surface band, the storefront tagline quoted verbatim in the centered display voice (caps, semi-expanded; „freundliche" carries the accent — the sign's yellow word), gold rule, tracked caption. Editorial beat between light and dark.
+5. **Der Salon** `dark-band` `#salon` — marine, ghost „Lübeck" outline (display voice, 1.5px ivory stroke at 7%), story copy + image pair with parallax (small photo knocked out in ground color, no shadow), then a **timetable strip**: Lage / Für alle / Termine as bordered, divided cells full-width, indexed `01–03`.
+6. **Stimmen** — renders `null` until verified quotes exist (dormant markup: surface cards, body-voice quotes, gold-tick attribution).
+7. **Kontakt & Termin** `split-object` `#kontakt` — header row (display-caps H2 + side note), then the **marine Terminkarte in a brass hairline frame** — the storefront sign's grammar as a contact card (eyebrow, tel at display scale `[font-stretch:115%]`, open/closed pill, quiet hours rows with a gold dot on today, address + links) beside the **map bleeding to the right viewport edge** (hairline-framed, warm-graded: grayscale 0.35 + sepia 0.08). No floating card, no flip board (the flip board lives on `/termin` only — pages differ too).
+8. **Footer** — display-caps marquee (velocity-reactive), marine ground, wordmark block, contact + hours columns, Impressum/Datenschutz. Curtain reveal.
 Secondary routes: `/termin` (phone-first explainer + flip-board hours + map + floating card), `/impressum`, `/datenschutz`.
 Nav (5): LEISTUNGEN · ÜBER ANETTA · ÖFFNUNGSZEITEN · KONTAKT + button TERMIN VEREINBAREN (`/termin` link in nav list; button = `tel:`).
-**Motif discipline:** scissors glyph appears exactly once (hero), the mirror-arch exactly once (Über Anetta), one ghost word per page (Salon), one marquee (footer). Repetition would turn devices into wallpaper.
+**Motif discipline:** scissors glyph appears exactly once (hero), the matted print exactly once (Über Anetta), corner ticks exactly once (Preisliste), the brass card-frame exactly once (Terminkarte), one ghost word per page (Salon), one marquee (footer). Index numerals live only in the Preisliste and the Salon strip. Repetition would turn devices into wallpaper.
 
 ### 4.6 Imagery art direction (genmedia)
 - Register: warm editorial stills — salon chair by window light, scissors/comb still life on linen, towels + ceramic, mirror with plants, brass details. **No faces, no hands, no haircut results, no likeness of the owner.**
 - Grade: warm ivory light, deep shadows toward marine, honey highlights; shallow DOF; believable 35mm feel; nothing sterile-stocky.
-- Fixed ratios: Hero full-bleed 1728×960 (under marine/75 overlay; composition with calm left third for the statement) · About detail 4:5 (arch-cropped) · Salon pair 4:5 + 3:2 · OG 1200×630.
+- Fixed ratios: Hero service rail 4× 2:3 portrait 1024×1536 (calm upper third, label scrim at the bottom; grounds alternate ivory/marine across the rail) · About detail 4:5 (matted) · Salon pair 4:5 + 3:2 · OG 1200×630. (Retired: v2 full-bleed hero 1728×960 — archived, see MANIFEST.)
 - Every accepted asset: row in `knowledge-base/images/MANIFEST.md` (file, model, prompt, date) + copy in `knowledge-base/images/generated/`. A slot that can't clear the bar ships as typographic composition instead.
 
 ### 4.7 Wordmark
-Code-rendered (house rule): „HAARSTUDIO" as tracked micro-caps (sans) above „Anetta" in Cormorant italic — the sign's script spirit, set in our serif. Realized statically in the footer brand block (`role="img"`, `aria-label`); nav and page headers use the one-line tracked-caps brand. The hero deliberately carries a statement instead of the wordmark (§1.5: words beat logos) — that's what keeps this template from reading as a sibling reskin.
+Code-rendered (house rule): „HAARSTUDIO" as tracked micro-caps (sans) above „ANETTA" in Archivo caps at `[font-stretch:115%]` — the sign rebuilt in the modern voice (v3). Realized at display scale as the hero masthead (h1: sr-only full name + aria-hidden visual spans; v3 client decision — supersedes the v2 statement-hero rationale) and statically in the footer brand block (`role="img"`, `aria-label`); page headers use the one-line tracked-caps brand.
 
 ## 5. Reskin guide (future salon clients)
 Swap per client: token values (§4.2 — derive from the client's physical brand), font pairing IF the brand demands (keep the three-voice contract), wordmark lines, all `app/data/*` (from the new KB), section copy, imagery set, legal pages. Keep: type-scale contract, accent discipline, price-row recipe, „Termin vereinbaren" phone staging (or swap CTA target if the client has a booking system), motion budget, section spine (reorder/cut per client emphasis).
