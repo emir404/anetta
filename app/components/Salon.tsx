@@ -51,7 +51,6 @@ export function Salon() {
 
   const photoLargeY = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const photoSmallY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const ghostY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   return (
     <section
@@ -60,18 +59,6 @@ export function Salon() {
       data-print-hidden
       className="relative overflow-clip bg-background px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[130px]"
     >
-      {/* Ghost place-name — sign blue at whisper strength on white */}
-      <motion.p
-        aria-hidden
-        className="pointer-events-none absolute -left-[3vw] bottom-2 select-none font-display font-semibold leading-none tracking-[-0.01em] text-transparent text-[clamp(110px,20vw,300px)]"
-        style={{
-          WebkitTextStroke: "1.5px rgba(19,71,146,0.10)",
-          y: reducedMotion ? 0 : ghostY,
-        }}
-      >
-        Lübeck
-      </motion.p>
-
       <div className="relative grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,46%)] lg:gap-20">
         {/* Text column */}
         <div className="flex flex-col items-start">
