@@ -58,7 +58,7 @@ export function Termin() {
               {/* Giant phone CTA */}
               <div className="mt-12 w-full">
                 <Reveal y={20}>
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.26em] text-foreground/55">
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.26em] text-foreground/70">
                     Rufen Sie uns an
                   </p>
                 </Reveal>
@@ -91,7 +91,7 @@ export function Termin() {
                 </motion.span>
 
                 <Reveal delay={0.15} className="mt-6">
-                  <p className="text-[14px] font-medium text-foreground/60">
+                  <p className="text-[14px] font-medium text-foreground/70">
                     {SALON.street}, {SALON.postalCode} {SALON.city} ·{" "}
                     {SALON.locality}
                   </p>
@@ -199,7 +199,7 @@ export function Termin() {
                   </span>
                   <span
                     className={`text-[16px] font-medium tabular-nums tracking-[0.04em] ${
-                      isClosed ? "text-foreground/40" : "text-foreground/90"
+                      isClosed ? "text-foreground/65" : "text-foreground/90"
                     }`}
                   >
                     {time}

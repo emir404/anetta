@@ -41,7 +41,7 @@ function CategoryBlock({ category }: { category: ServiceCategory }) {
         ))}
       </dl>
       {category.note && (
-        <p className="mt-3 text-[13.5px] font-medium italic leading-[1.6] text-foreground/55">
+        <p className="mt-3 text-[13.5px] font-medium italic leading-[1.6] text-foreground/70">
           {category.note}
         </p>
       )}
@@ -103,7 +103,7 @@ export function Services() {
                 ))}
               </Stagger>
               <Reveal delay={0.1} className="mt-10">
-                <p className="text-pretty text-[13.5px] font-medium italic leading-[1.6] text-foreground/55">
+                <p className="text-pretty text-[13.5px] font-medium italic leading-[1.6] text-foreground/70">
                   {PRICE_FOOTNOTE}
                 </p>
               </Reveal>

@@ -54,7 +54,7 @@ export function Contact() {
         {/* Giant dial-to-book headline */}
         <div className="mt-16 lg:mt-24">
           <Reveal y={24}>
-            <p className="text-[12px] font-semibold uppercase tracking-[0.26em] text-foreground/55 sm:text-[13px]">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.26em] text-foreground/70 sm:text-[13px]">
               Termin vereinbaren — rufen Sie uns an
             </p>
           </Reveal>
@@ -193,7 +193,7 @@ export function Contact() {
                   </span>
                   <span
                     className={`text-[16px] font-medium tabular-nums tracking-[0.04em] ${
-                      isClosed ? "text-foreground/40" : "text-foreground/90"
+                      isClosed ? "text-foreground/65" : "text-foreground/90"
                     }`}
                   >
                     {time}

@@ -61,7 +61,7 @@ export function LegalSection({
 /** Visible marker for client-pending legal facts — never invent these. */
 export function PendingFact({ children }: { children: React.ReactNode }) {
   return (
-    <span className="border border-dashed border-accent/60 bg-surface px-2 py-0.5 text-[13px] font-semibold text-accent">
+    <span className="border border-dashed border-accent/60 bg-surface px-2 py-0.5 text-[13px] font-semibold text-foreground/80">
       {children}
     </span>
   );

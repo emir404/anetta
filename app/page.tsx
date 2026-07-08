@@ -15,6 +15,7 @@ const jsonLd = {
   "@type": "HairSalon",
   name: SALON.name,
   url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image.jpg`,
   telephone: SALON.phoneE164,
   address: {
     "@type": "PostalAddress",

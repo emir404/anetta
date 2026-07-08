@@ -100,7 +100,7 @@ Nav (5): LEISTUNGEN · ÜBER ANETTA · ÖFFNUNGSZEITEN · KONTAKT + button TERMI
 - Every accepted asset: row in `knowledge-base/images/MANIFEST.md` (file, model, prompt, date) + copy in `knowledge-base/images/generated/`. A slot that can't clear the bar ships as typographic composition instead.
 
 ### 4.7 Wordmark
-Code-rendered (house rule): „HAARSTUDIO" as tracked micro-caps (sans) above „Anetta" in Cormorant italic at display scale — the sign's script spirit, set in our serif. Per-letter rise reveal (house Wordmark pattern). Footer/nav variants inherit `currentColor`.
+Code-rendered (house rule): „HAARSTUDIO" as tracked micro-caps (sans) above „Anetta" in Cormorant italic — the sign's script spirit, set in our serif. Realized statically in the footer brand block (`role="img"`, `aria-label`); nav and page headers use the one-line tracked-caps brand. The hero deliberately carries a statement instead of the wordmark (§1.5: words beat logos) — that's what keeps this template from reading as a sibling reskin.
 
 ## 5. Reskin guide (future salon clients)
 Swap per client: token values (§4.2 — derive from the client's physical brand), font pairing IF the brand demands (keep the three-voice contract), wordmark lines, all `app/data/*` (from the new KB), section copy, imagery set, legal pages. Keep: type-scale contract, accent discipline, price-row recipe, „Termin vereinbaren" phone staging (or swap CTA target if the client has a booking system), motion budget, section spine (reorder/cut per client emphasis).

@@ -15,7 +15,9 @@ import { useReducedMotionSafe } from "./Reveal";
 import { HOURS_SUMMARY } from "../data/openingHours";
 import { SALON } from "../data/salon";
 
-const MARQUEE_TEXT = "Damen · Herren · Kinder · Am Mühlentor · Lübeck · ";
+// Trailing NBSP: a plain trailing space collapses at the span boundary and
+// the loop copies would butt together ("Lübeck ·Damen").
+const MARQUEE_TEXT = "Damen · Herren · Kinder · Am Mühlentor · Lübeck · ";
 
 function wrap(min: number, max: number, v: number): number {
   const range = max - min;

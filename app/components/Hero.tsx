@@ -129,7 +129,7 @@ export function Hero() {
               const variantProps = {
                 onClick: () => setMenuOpen(false),
                 className:
-                  "py-2 text-[15px] font-semibold uppercase tracking-[0.2em] text-foreground",
+                  "flex min-h-11 items-center py-2 text-[15px] font-semibold uppercase tracking-[0.2em] text-foreground",
                 initial: { opacity: 0, y: 16 },
                 animate: { opacity: 1, y: 0 },
                 transition: {
