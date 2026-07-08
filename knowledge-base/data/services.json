@@ -1,0 +1,65 @@
+{
+  "currency": "EUR",
+  "price_mode": "draft",
+  "verified": false,
+  "source": "Marktüblicher Entwurf (Lübecker Nachbarschaftsniveau), 2026-07-08 — NICHT von der Kundin. Verifiziert ist nur die Gliederung Damen/Herren/Kinder (Tagline am Ladenschild).",
+  "verification_note": "Jede Zeile im Go-Live-Call mit Anetta Dzikowski durchgehen (Angebot ja/nein, echter Preis). Bestätigte Werte: verified true, status confirmed. Danach price_mode auf 'published'. Go-Live ohne bestätigte Liste unzulässig.",
+  "captured_at": "2026-07-08",
+  "categories": [
+    {
+      "name": "Damen",
+      "status": "verified_audience",
+      "items": [
+        { "name": "Waschen, Schneiden & Föhnen", "price": 39.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Trockenhaarschnitt", "price": 26.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Waschen & Föhnen (kurz)", "price": 22.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Waschen & Föhnen (lang)", "price": 27.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" }
+      ]
+    },
+    {
+      "name": "Herren",
+      "status": "verified_audience",
+      "items": [
+        { "name": "Waschen, Schneiden & Styling", "price": 25.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Maschinenschnitt", "price": 16.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Bart konturieren & pflegen", "price": 12.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" }
+      ]
+    },
+    {
+      "name": "Kinder",
+      "status": "verified_audience",
+      "audience_note": "Altersgrenze 'bis 12 Jahre' ist Annahme",
+      "items": [
+        { "name": "Kinderhaarschnitt (bis 12 Jahre)", "price": 15.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" }
+      ]
+    },
+    {
+      "name": "Farbe & Strähnen",
+      "status": "assumed",
+      "items": [
+        { "name": "Ansatzfarbe", "price": 42.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Komplettfarbe", "price": 52.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Foliensträhnen (Oberkopf)", "price": 49.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Foliensträhnen (komplett)", "price": 69.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Tönung", "price": 35.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" }
+      ]
+    },
+    {
+      "name": "Dauerwelle",
+      "status": "assumed",
+      "items": [
+        { "name": "Dauerwelle inkl. Schnitt & Pflege", "price": 75.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Volumenwelle (Ansatz)", "price": 55.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" }
+      ]
+    },
+    {
+      "name": "Pflege & Anlässe",
+      "status": "assumed",
+      "items": [
+        { "name": "Intensivkur mit Kopfhautmassage", "price": 15.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Augenbrauen zupfen oder färben", "price": 12.0, "verified": false, "status": "assumed", "price_note": "Marktüblicher Entwurf, vor Go-Live bestätigen" },
+        { "name": "Hochsteckfrisur / festliche Anlässe", "price": 45.0, "verified": false, "status": "assumed", "price_prefix": "ab", "price_note": "Ab-Preis; Aufwand variiert; vor Go-Live bestätigen" }
+      ]
+    }
+  ]
+}

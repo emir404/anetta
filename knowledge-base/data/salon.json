@@ -1,0 +1,64 @@
+{
+  "name": "Haarstudio Anetta",
+  "legal_name": null,
+  "owner": "Anetta Dzikowski",
+  "business_type": "Friseursalon (Damen, Herren, Kinder)",
+  "tagline": "Der freundliche Damen- Herren- und Kinderfriseur",
+  "tagline_note": "Wörtlich vom Ladenschild inkl. Bindestrich-Setzung 'Damen- Herren-'; bei Zitaten Original-Schreibweise beibehalten",
+  "positioning": "Warmer, persönlicher Nachbarschaftssalon für alle Generationen — heritage-warm, nicht fashion-editorial",
+  "district": "Lübeck, am Mühlentor (Nahtstelle Innenstadt / St. Jürgen)",
+  "address": {
+    "street": "Kronsforder Allee 3a",
+    "postal_code": "23560",
+    "city": "Lübeck",
+    "state": "Schleswig-Holstein",
+    "country": "DE"
+  },
+  "geo": {
+    "latitude": 53.8574831,
+    "longitude": 10.6911155,
+    "source": "Google-Maps-Link (user-provided), 2026-07-08"
+  },
+  "contact": {
+    "phone_display": "0451 79 14 67",
+    "phone_e164": "+49451791467",
+    "email": null,
+    "website": null,
+    "socials": null
+  },
+  "booking": {
+    "method": "phone",
+    "online_booking": false,
+    "walk_in_policy": null
+  },
+  "opening_hours": {
+    "monday": "geschlossen",
+    "tuesday": "09:00 - 18:00",
+    "wednesday": "09:00 - 18:00",
+    "thursday": "09:00 - 18:00",
+    "friday": "09:00 - 18:00",
+    "saturday": "08:00 - 13:00",
+    "sunday": "geschlossen",
+    "status": "UNVERIFIED — Quelle: 11880-Such-Snippet; vor Go-Live mit Kundin bestätigen"
+  },
+  "sources": [
+    { "fact_scope": "Name, Koordinaten, Tagline, Schaufenster-Telefonnummer", "source": "Google-Maps-Eintrag + Storefront-Foto (user-provided)", "captured_at": "2026-07-08" },
+    { "fact_scope": "Adresse, Kategorie, Stadtteil, Foto 2014", "source": "https://www.golocal.de/luebeck/friseure/haarstudio-anetta-YUKPp/", "captured_at": "2026-07-08" },
+    { "fact_scope": "Öffnungszeiten", "source": "https://www.11880.com/branchenbuch/luebeck/110631771B29110/anetta-dzikowski.html (via Such-Snippet)", "captured_at": "2026-07-08" },
+    { "fact_scope": "Adresse, Telefon, unbeanspruchter Eintrag", "source": "https://www.yelp.de/biz/anetta-dzikowski-l%C3%BCbeck", "captured_at": "2026-07-08" },
+    { "fact_scope": "Telefon", "source": "https://kontakt-2.dastelefonbuch.de/L%C3%BCbeck/Anetta-Dzikowski-L%C3%BCbeck-Kronsforder-Allee.html", "captured_at": "2026-07-08" }
+  ],
+  "data_gaps": [
+    "legal_name / Rechtsform unbestätigt",
+    "E-Mail unbekannt (Impressum-Pflichtangabe nach § 5 DDG)",
+    "USt-IdNr. / Kleinunternehmer-Status unbekannt",
+    "Handwerkskammer / Handwerksrolle unbestätigt (Friseur = zulassungspflichtiges Handwerk)",
+    "Öffnungszeiten unbestätigt (Einzelquelle)",
+    "Leistungen & Preise unbestätigt (siehe services.json)",
+    "Walk-in-Politik unbekannt",
+    "Gründungsjahr unbekannt — Website macht keine Geschichtsbehauptung",
+    "Keine freigegebenen Fotos, keine freigegebenen Kundenstimmen",
+    "Produktions-Domain (SITE_URL) offen"
+  ],
+  "captured_at": "2026-07-08"
+}
