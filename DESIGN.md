@@ -82,21 +82,23 @@ Usage discipline: accent never fills, never button grounds. Buttons = 1px ink bo
 ### 4.4 Motion budget (house kit, nothing new)
 `Reveal` rises · `TextLineReveal` clip-mask headlines · `Stagger` lists · hours flip-board · ONE slow velocity marquee above the footer · hovers: color→accent 200–500ms, underline scale-x, image scale ≤1.04. Everything branches on `useReducedMotionSafe()`. Lenis smooth scroll. No parallax beyond the house ghost-heading/photo drifts; no autoplay media.
 
-### 4.5 Section architecture (homepage spine)
-1. **Hero** — pure typography on ivory. Eyebrow „Friseur in Lübeck · am Mühlentor"; display headline „Der *freundliche* Friseur am Mühlentor." (italic emphasis); support line Damen · Herren · Kinder; primary CTA „Termin vereinbaren" (`tel:`) + secondary „Zur Preisliste"; hero furniture bottom row: today's hours · address · phone. No background photo (none exists that we may use — honesty beats decoration).
-2. **Preisliste** `#leistungen` — set-piece list: category serif headings, rows (sans name / dot-leader hairline / tabular `39,–` in accent), Farbe consultation note, italic footnote, phone line beneath.
-3. **Über Anetta** `#ueber-anetta` — personal section; large serif „Anetta" italic; honest copy (inhabergeführt, alle Generationen, persönliche Beratung); NO invented history; one generated ambience detail image 4:5.
-4. **Der Salon** `#salon` — inverted marine band; accent-bright eyebrows; Mühlentor/Lage story + „für alle Generationen"; 2 generated ambience images (4:5 + 3:2); „Route planen" link.
-5. **Stimmen** — renders `null` until verified quotes exist (empty `TESTIMONIALS`).
-6. **Kontakt & Termin** `#kontakt` — ghost heading, „Termin vereinbaren — rufen Sie uns an", tel-headline at display scale, hours flip-board (`#oeffnungszeiten`), map + floating address card.
-7. **Footer** — marquee („Damen · Herren · Kinder · Am Mühlentor · Lübeck ·"), marine ground, brand + contact + hours columns, Impressum/Datenschutz.
-Secondary routes: `/termin` (phone-first explainer + hours + map), `/impressum`, `/datenschutz`.
+### 4.5 Section architecture (homepage spine — v2, every section its own compositional shape)
+1. **Hero** `image-led` — full-bleed generated salon interior under `bg-marine/75`, ivory statement „Der *freundliche* Friseur am Mühlentor." (italic word in accent-bright — the sign's yellow word on blue), **snip device**: line-art scissors glyph does a small snip, then a gold hairline draws out of its blades; support line, ivory CTA + Preisliste anchor; bottom info bar (hours · address · groups).
+2. **Preisliste** `object` `#leistungen` — centered serif intro, then **die Karte**: a bordered surface sheet with „PREISLISTE" between flanking hairlines, categories flowing in two columns (xl), dot-leader rows with `39,–` digits in accent, centered italic footnote inside the sheet; phone line beneath. Prints as a document.
+3. **Über Anetta** `arch-split` `#ueber-anetta` — the **mirror-arch**: 4:5 image in a `rounded-t-full` frame with a hairline gold border (the salon-mirror motif), text right; honest copy, phone link.
+4. **Sign quote** `interlude` — surface band, the storefront tagline quoted verbatim in centered serif italic, gold rule, tracked caption. Editorial beat between light and dark.
+5. **Der Salon** `dark-band` `#salon` — marine, ghost italic „Lübeck" outline, story copy + image pair with parallax, then a **timetable strip**: Lage / Für alle / Termine as bordered, divided cells full-width.
+6. **Stimmen** — renders `null` until verified quotes exist.
+7. **Kontakt & Termin** `split-object` `#kontakt` — header row (serif H2 + side note), then a **marine Terminkarte** (eyebrow, tel at display scale, open/closed pill, quiet hours rows with a gold dot on today, address + links) beside the **map bleeding to the right viewport edge**. No floating card, no flip board (the flip board lives on `/termin` only — pages differ too).
+8. **Footer** — serif-italic marquee, marine ground, wordmark block, contact + hours columns, Impressum/Datenschutz. Curtain reveal.
+Secondary routes: `/termin` (phone-first explainer + flip-board hours + map + floating card), `/impressum`, `/datenschutz`.
 Nav (5): LEISTUNGEN · ÜBER ANETTA · ÖFFNUNGSZEITEN · KONTAKT + button TERMIN VEREINBAREN (`/termin` link in nav list; button = `tel:`).
+**Motif discipline:** scissors glyph appears exactly once (hero), the mirror-arch exactly once (Über Anetta), one ghost word per page (Salon), one marquee (footer). Repetition would turn devices into wallpaper.
 
 ### 4.6 Imagery art direction (genmedia)
 - Register: warm editorial stills — salon chair by window light, scissors/comb still life on linen, towels + ceramic, mirror with plants, brass details. **No faces, no hands, no haircut results, no likeness of the owner.**
 - Grade: warm ivory light, deep shadows toward marine, honey highlights; shallow DOF; believable 35mm feel; nothing sterile-stocky.
-- Fixed ratios: About detail 4:5 · Salon pair 4:5 + 3:2 · OG 1200×630 (typographic, generated texture background at most).
+- Fixed ratios: Hero full-bleed 1728×960 (under marine/75 overlay; composition with calm left third for the statement) · About detail 4:5 (arch-cropped) · Salon pair 4:5 + 3:2 · OG 1200×630.
 - Every accepted asset: row in `knowledge-base/images/MANIFEST.md` (file, model, prompt, date) + copy in `knowledge-base/images/generated/`. A slot that can't clear the bar ships as typographic composition instead.
 
 ### 4.7 Wordmark

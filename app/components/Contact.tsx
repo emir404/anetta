@@ -1,214 +1,175 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
-import {
-  Reveal,
-  Stagger,
-  StaggerItem,
-  TextLineReveal,
-  EASE,
-  useReducedMotionSafe,
-} from "./Reveal";
+import { motion } from "motion/react";
+import { Reveal, TextLineReveal, EASE, useReducedMotionSafe } from "./Reveal";
 import { HOURS, DISPLAY_ORDER, useOpenState } from "../data/openingHours";
 import { SALON, MAPS_URL, MAPS_EMBED_URL } from "../data/salon";
 
+/**
+ * Kontakt as a split object: a marine Terminkarte beside the map, which
+ * bleeds to the viewport edge. Deliberately unlike the sibling templates'
+ * stacked contact pattern.
+ */
 export function Contact() {
-  const ref = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotionSafe();
   const openState = useOpenState();
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const ghostY = useTransform(scrollYProgress, [0, 1], [120, -120]);
 
   return (
     <section
       id="kontakt"
-      ref={ref}
-      className="relative overflow-clip bg-background px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[140px]"
+      className="bg-background px-6 py-20 sm:px-10 lg:px-[min(10.5vw,152px)] lg:py-[140px]"
     >
-      {/* Ghost heading */}
-      <motion.p
-        aria-hidden
-        data-print-hidden
-        className="pointer-events-none absolute -right-[2vw] top-8 select-none font-serif italic font-medium leading-none text-transparent text-[clamp(120px,22vw,340px)]"
-        style={{
-          WebkitTextStroke: "1.5px rgba(29,42,54,0.09)",
-          y: reducedMotion ? 0 : ghostY,
-        }}
-      >
-        Termin
-      </motion.p>
-
-      <div className="relative">
+      <div className="flex flex-wrap items-end justify-between gap-x-16 gap-y-6">
         <TextLineReveal
           as="h2"
           lines={["Kontakt &", "Termin"]}
           className="font-serif font-medium leading-[1.05] tracking-[-0.01em] text-foreground text-[clamp(38px,5.5vw,60px)]"
         />
-
-        {/* Giant dial-to-book headline */}
-        <div className="mt-16 lg:mt-24">
-          <Reveal y={24}>
-            <p className="text-[12px] font-semibold uppercase tracking-[0.26em] text-foreground/70 sm:text-[13px]">
-              Termin vereinbaren — rufen Sie uns an
-            </p>
-          </Reveal>
-          <motion.span
-            className="mt-3 block overflow-hidden"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-          >
-            <motion.a
-              href={`tel:${SALON.phoneE164}`}
-              className="group block w-fit max-w-full"
-              variants={{
-                hidden: reducedMotion ? { opacity: 0 } : { y: "105%" },
-                visible: {
-                  y: 0,
-                  opacity: 1,
-                  transition: { duration: 1.1, delay: 0.1, ease: EASE },
-                },
-              }}
-            >
-              <span className="block whitespace-nowrap font-serif font-medium leading-[1.02] tabular-nums text-foreground transition-colors duration-500 group-hover:text-accent text-[clamp(44px,9.5vw,128px)]">
-                0451&nbsp;79&nbsp;14&nbsp;67
-              </span>
-              <span
-                aria-hidden
-                className="mt-2 block h-[2px] w-full origin-left scale-x-0 bg-accent transition-transform duration-700 ease-out group-hover:scale-x-100"
-              />
-            </motion.a>
-          </motion.span>
-
-          <Reveal delay={0.1} className="mt-6">
-            <Link
-              href="/termin"
-              className="group inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent sm:min-h-0"
-            >
-              Alles zur Terminvereinbarung
-              <span
-                aria-hidden
-                className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
-              >
-                →
-              </span>
-            </Link>
-          </Reveal>
-
-          <Stagger
-            className="mt-8 flex flex-col gap-x-10 gap-y-3 text-[15px] font-medium text-foreground/75 sm:flex-row sm:items-center sm:text-[16px]"
-            stagger={0.1}
-          >
-            <StaggerItem y={16}>
-              <span>
-                {SALON.street}, {SALON.postalCode} {SALON.city}
-              </span>
-            </StaggerItem>
-            <StaggerItem y={16}>
-              <span className="hidden text-foreground/30 sm:inline" aria-hidden>
-                ·
-              </span>
-            </StaggerItem>
-            <StaggerItem y={16}>
-              <span>Damen · Herren · Kinder</span>
-            </StaggerItem>
-          </Stagger>
-        </div>
-
-        {/* Departure-board opening hours */}
-        <div id="oeffnungszeiten" className="mt-20 lg:mt-28">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <Reveal>
-              <h3 className="text-[18px] font-semibold uppercase tracking-[0.14em] text-foreground">
-                Öffnungszeiten
-              </h3>
-            </Reveal>
-            {openState && (
-              <motion.p
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: EASE }}
-                className={`flex items-center gap-2.5 border px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] ${
-                  openState.isOpen
-                    ? "border-accent/50 text-accent"
-                    : "border-foreground/20 text-foreground/50"
-                }`}
-              >
-                <span
-                  aria-hidden
-                  className={`inline-block h-2 w-2 rounded-full ${
-                    openState.isOpen
-                      ? "animate-pulse bg-accent"
-                      : "bg-foreground/40"
-                  }`}
-                />
-                {openState.isOpen ? "Jetzt geöffnet" : "Derzeit geschlossen"}
-              </motion.p>
-            )}
-          </div>
-
-          <div className="mt-8 [perspective:900px]">
-            {DISPLAY_ORDER.map((dayIndex, i) => {
-              const { day, time } = HOURS[dayIndex];
-              const isToday = openState?.day === dayIndex;
-              const isClosed = HOURS[dayIndex].open === null;
-              return (
-                <motion.div
-                  key={day}
-                  initial={
-                    reducedMotion
-                      ? { opacity: 0 }
-                      : { opacity: 0, rotateX: -70, y: 24 }
-                  }
-                  whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: 0.7, delay: i * 0.07, ease: EASE }}
-                  className={`relative flex items-baseline justify-between gap-4 border-b border-foreground/10 px-4 py-4 [transform-origin:top] sm:px-6 ${
-                    isToday ? "bg-surface" : ""
-                  }`}
-                >
-                  {isToday && (
-                    <motion.span
-                      aria-hidden
-                      className="absolute bottom-0 left-0 top-0 w-1 bg-accent"
-                      initial={{ scaleY: 0 }}
-                      whileInView={{ scaleY: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
-                    />
-                  )}
-                  <span className="flex items-baseline gap-3 text-[15px] font-semibold uppercase tracking-[0.12em] text-foreground">
-                    {day}
-                    {isToday && (
-                      <span className="text-[11px] font-semibold tracking-[0.16em] text-accent">
-                        Heute
-                      </span>
-                    )}
-                  </span>
-                  <span
-                    className={`text-[16px] font-medium tabular-nums tracking-[0.04em] ${
-                      isClosed ? "text-foreground/65" : "text-foreground/90"
-                    }`}
-                  >
-                    {time}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
+        <Reveal delay={0.1}>
+          <p className="max-w-[38ch] text-pretty pb-2 text-[15px] font-medium leading-[1.6] text-foreground/75">
+            Termine vergeben wir persönlich am Telefon — rufen Sie uns gerne
+            zu den Öffnungszeiten an.
+          </p>
+        </Reveal>
       </div>
 
-      {/* Map with floating card */}
-      <div className="relative mt-16 lg:mt-24" data-print-hidden>
-        <Reveal y={60} amount={0.15}>
-          <div className="relative aspect-[4/3] w-full overflow-clip sm:aspect-[16/9] lg:aspect-[21/9]">
+      <div className="mt-12 grid lg:mt-16 lg:grid-cols-[minmax(0,46%)_1fr]">
+        {/* Terminkarte */}
+        <motion.div
+          className="bg-marine p-8 text-background sm:p-12 lg:p-14"
+          initial={{ opacity: 0, y: reducedMotion ? 0 : 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.9, ease: EASE }}
+        >
+          <p className="text-[12px] font-semibold uppercase tracking-[0.3em] text-accent-bright">
+            Termin vereinbaren
+          </p>
+
+          <a
+            href={`tel:${SALON.phoneE164}`}
+            className="group mt-5 block w-fit"
+          >
+            <span className="block whitespace-nowrap font-serif font-medium leading-none tabular-nums text-background transition-colors duration-500 group-hover:text-accent-bright text-[clamp(36px,4.8vw,64px)]">
+              0451&nbsp;79&nbsp;14&nbsp;67
+            </span>
+            <span
+              aria-hidden
+              className="mt-2 block h-[2px] w-full origin-left scale-x-0 bg-accent-bright transition-transform duration-700 ease-out group-hover:scale-x-100"
+            />
+          </a>
+
+          {openState && (
+            <motion.p
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: EASE }}
+              className={`mt-6 inline-flex items-center gap-2.5 border px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] ${
+                openState.isOpen
+                  ? "border-accent-bright/50 text-accent-bright"
+                  : "border-background/25 text-background/60"
+              }`}
+            >
+              <span
+                aria-hidden
+                className={`inline-block h-2 w-2 rounded-full ${
+                  openState.isOpen
+                    ? "animate-pulse bg-accent-bright"
+                    : "bg-background/40"
+                }`}
+              />
+              {openState.isOpen ? "Jetzt geöffnet" : "Derzeit geschlossen"}
+            </motion.p>
+          )}
+
+          {/* Hours — quiet rows, gold dot marks today */}
+          <div id="oeffnungszeiten" className="mt-10">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent-bright">
+              Öffnungszeiten
+            </h3>
+            <div className="mt-4">
+              {DISPLAY_ORDER.map((dayIndex) => {
+                const { day, time } = HOURS[dayIndex];
+                const isToday = openState?.day === dayIndex;
+                const isClosed = HOURS[dayIndex].open === null;
+                return (
+                  <div
+                    key={day}
+                    className="flex items-baseline justify-between gap-4 border-b border-background/12 py-3"
+                  >
+                    <span
+                      className={`flex items-baseline gap-2.5 text-[14px] font-semibold uppercase tracking-[0.12em] ${
+                        isToday ? "text-accent-bright" : "text-background/90"
+                      }`}
+                    >
+                      {isToday && (
+                        <span
+                          aria-hidden
+                          className="inline-block h-1.5 w-1.5 translate-y-[-2px] rounded-full bg-accent-bright"
+                        />
+                      )}
+                      {day}
+                      {isToday && <span className="sr-only">(heute)</span>}
+                    </span>
+                    <span
+                      className={`text-[15px] font-medium tabular-nums ${
+                        isClosed ? "text-background/55" : "text-background/85"
+                      }`}
+                    >
+                      {time}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Address + links */}
+          <div className="mt-10 flex flex-col gap-4">
+            <p className="text-[15px] font-medium leading-[1.6] text-background/85">
+              {SALON.street}, {SALON.postalCode} {SALON.city} ·{" "}
+              {SALON.locality}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-accent-bright sm:min-h-0"
+              >
+                Route planen
+                <span
+                  aria-hidden
+                  className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                >
+                  →
+                </span>
+              </a>
+              <Link
+                href="/termin"
+                className="group inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-background/70 transition-colors hover:text-background sm:min-h-0"
+              >
+                Alles zur Terminvereinbarung
+                <span
+                  aria-hidden
+                  className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                >
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Map — bleeds to the right viewport edge */}
+        <Reveal
+          y={40}
+          amount={0.15}
+          className="relative min-h-[380px] lg:mr-[calc(min(10.5vw,152px)*-1)]"
+        >
+          <div className="absolute inset-0">
             <iframe
               src={MAPS_EMBED_URL}
               title="Haarstudio Anetta auf Google Maps – Kronsforder Allee 3a, 23560 Lübeck"
@@ -219,41 +180,6 @@ export function Contact() {
             />
           </div>
         </Reveal>
-
-        <motion.div
-          className="relative -mt-8 ml-4 mr-4 border-l-4 border-accent bg-surface p-6 shadow-2xl sm:absolute sm:bottom-8 sm:left-8 sm:ml-0 sm:mr-0 sm:mt-0 sm:max-w-[360px]"
-          initial={{
-            opacity: 0,
-            y: reducedMotion ? 0 : 60,
-            x: reducedMotion ? 0 : -24,
-          }}
-          whileInView={{ opacity: 1, y: 0, x: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ type: "spring", stiffness: 90, damping: 16, delay: 0.2 }}
-        >
-          <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-foreground">
-            Haarstudio Anetta
-          </p>
-          <p className="mt-2 text-[15px] font-medium leading-[1.6] text-foreground/80">
-            {SALON.street}
-            <br />
-            {SALON.postalCode} {SALON.city} · {SALON.locality}
-          </p>
-          <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-4 inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-accent sm:min-h-0"
-          >
-            Route planen
-            <span
-              aria-hidden
-              className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
-            >
-              →
-            </span>
-          </a>
-        </motion.div>
       </div>
     </section>
   );

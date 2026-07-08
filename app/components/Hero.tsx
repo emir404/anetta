@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -21,15 +22,39 @@ const NAV_LINKS = [
   { label: "KONTAKT", href: "#kontakt" },
 ];
 
-// Statement hero (DESIGN.md §4.5): the sign's yellow word on blue becomes
-// the honeyed italic word in a marine-ink line.
+// Statement hero over the salon itself (DESIGN.md §4.5): the sign's yellow
+// word on blue becomes the honeyed italic word in an ivory line.
 const HEADLINE: ReactNode[] = [
   <>
-    Der <em className="font-serif italic font-normal text-accent">freundliche</em>
+    Der{" "}
+    <em className="font-serif italic font-normal text-accent-bright">
+      freundliche
+    </em>
   </>,
   <>Friseur am</>,
   <>Mühlentor.</>,
 ];
+
+/** Minimal line-art scissors — the vertical's one pictographic device. */
+function ScissorsGlyph({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 44 20"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <circle cx="6" cy="5" r="3.4" />
+      <circle cx="6" cy="15" r="3.4" />
+      <path d="M9.2 6.2 40 14.4" />
+      <path d="M9.2 13.8 40 5.6" />
+      <circle cx="21" cy="10" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -43,13 +68,33 @@ export function Hero() {
 
   const statementY = useTransform(scrollYProgress, [0, 1], [0, 110]);
   const statementOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const photoScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
   const infoOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
     <section
       ref={ref}
-      className="relative flex min-h-svh flex-col overflow-clip bg-background"
+      className="relative flex min-h-svh flex-col overflow-clip bg-marine"
     >
+      {/* The salon itself, behind everything */}
+      <motion.div
+        className="absolute inset-0"
+        style={reducedMotion ? undefined : { scale: photoScale }}
+        initial={reducedMotion ? { opacity: 0 } : { scale: 1.06, opacity: 0 }}
+        animate={reducedMotion ? { opacity: 1 } : { scale: 1, opacity: 1 }}
+        transition={{ duration: 1.6, ease: EASE }}
+      >
+        <Image
+          src="/images/hero.jpg"
+          alt="Vintage-Salonstuhl vor rundem Messingspiegel im warmen Abendlicht"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-marine/75" />
+      </motion.div>
+
       {/* Nav */}
       <motion.header
         className="relative z-20 flex items-center justify-between px-6 pt-8 sm:px-10 lg:px-[min(10.5vw,152px)] lg:pt-12"
@@ -59,7 +104,7 @@ export function Hero() {
       >
         <a
           href="#"
-          className="py-2 text-[13px] font-semibold uppercase tracking-[0.24em] text-foreground"
+          className="py-2 text-[13px] font-semibold uppercase tracking-[0.24em] text-background"
         >
           Haarstudio&nbsp;Anetta
         </a>
@@ -70,7 +115,7 @@ export function Hero() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-foreground/80 transition-colors hover:text-accent"
+                className="py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-background/85 transition-colors hover:text-accent-bright"
               >
                 {link.label}
               </Link>
@@ -78,7 +123,7 @@ export function Hero() {
               <a
                 key={link.label}
                 href={link.href}
-                className="py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-foreground/80 transition-colors hover:text-accent"
+                className="py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-background/85 transition-colors hover:text-accent-bright"
               >
                 {link.label}
               </a>
@@ -88,7 +133,7 @@ export function Hero() {
 
         <motion.a
           href={`tel:${SALON.phoneE164}`}
-          className="hidden h-11 items-center justify-center bg-foreground px-6 text-[12px] font-semibold uppercase tracking-[0.18em] text-background lg:flex"
+          className="hidden h-11 items-center justify-center bg-background px-6 text-[12px] font-semibold uppercase tracking-[0.18em] text-marine lg:flex"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -105,11 +150,11 @@ export function Hero() {
           className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <motion.span
-            className="block h-[2px] w-6 bg-foreground"
+            className={`block h-[2px] w-6 ${menuOpen ? "bg-foreground" : "bg-background"}`}
             animate={menuOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
           />
           <motion.span
-            className="block h-[2px] w-6 bg-foreground"
+            className={`block h-[2px] w-6 ${menuOpen ? "bg-foreground" : "bg-background"}`}
             animate={menuOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
           />
         </button>
@@ -173,7 +218,7 @@ export function Hero() {
           }
         >
           <motion.p
-            className="text-[12px] font-semibold uppercase tracking-[0.3em] text-accent"
+            className="text-[12px] font-semibold uppercase tracking-[0.3em] text-accent-bright"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.25, ease: EASE }}
@@ -181,9 +226,12 @@ export function Hero() {
             Friseur in Lübeck · {SALON.locality}
           </motion.p>
 
-          <h1 className="mt-6 font-serif font-medium leading-[0.98] tracking-[-0.01em] text-foreground text-[clamp(52px,10vw,144px)]">
+          <h1 className="mt-6 font-serif font-medium leading-[0.98] tracking-[-0.01em] text-background text-[clamp(52px,10vw,144px)]">
             {HEADLINE.map((line, i) => (
-              <span key={i} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+              <span
+                key={i}
+                className="block overflow-hidden pb-[0.08em] -mb-[0.08em]"
+              >
                 <motion.span
                   className="block"
                   initial={
@@ -202,22 +250,41 @@ export function Hero() {
             ))}
           </h1>
 
-          <motion.div
-            aria-hidden
-            className="mt-10 h-px w-[min(280px,40vw)] origin-left bg-accent"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.1, delay: 1.05, ease: EASE }}
-          />
+          {/* The snip: scissors open the gold line */}
+          <div className="mt-10 flex items-center gap-3 text-accent-bright" aria-hidden>
+            <motion.span
+              className="shrink-0"
+              initial={{ opacity: 0 }}
+              animate={
+                reducedMotion
+                  ? { opacity: 1 }
+                  : { opacity: 1, rotate: [0, -7, 5, 0] }
+              }
+              transition={
+                reducedMotion
+                  ? { duration: 0.6, delay: 1.0 }
+                  : { duration: 0.55, delay: 1.0, ease: EASE }
+              }
+            >
+              <ScissorsGlyph className="h-5 w-11" />
+            </motion.span>
+            <motion.span
+              className="block h-px w-[min(280px,32vw)] origin-left bg-current"
+              initial={{ scaleX: reducedMotion ? 1 : 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 1.3, delay: 1.2, ease: EASE }}
+            />
+          </div>
 
           <motion.p
-            className="mt-8 max-w-[46ch] text-pretty text-[16px] font-medium leading-[1.65] text-foreground/80 sm:text-[17px]"
+            className="mt-8 max-w-[46ch] text-pretty text-[16px] font-medium leading-[1.65] text-background/85 sm:text-[17px]"
             initial={{ opacity: 0, y: reducedMotion ? 0 : 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.15, ease: EASE }}
           >
-            Willkommen bei {SALON.owner} — persönliche Beratung, ehrliches
-            Handwerk und Zeit für Ihr Haar. Für Damen, Herren und Kinder.
+            Schnitt, Farbe und Dauerwelle — mit Zeit, Ruhe und ehrlichem
+            Handwerk. Willkommen bei {SALON.owner}, für Damen, Herren und
+            Kinder.
           </motion.p>
 
           <motion.div
@@ -228,13 +295,13 @@ export function Hero() {
           >
             <a
               href={`tel:${SALON.phoneE164}`}
-              className="flex h-12 items-center justify-center bg-foreground px-7 text-[13px] font-semibold uppercase tracking-[0.18em] text-background transition-transform duration-200 hover:scale-[1.02]"
+              className="flex h-12 items-center justify-center bg-background px-7 text-[13px] font-semibold uppercase tracking-[0.18em] text-marine transition-transform duration-200 hover:scale-[1.02]"
             >
               Termin vereinbaren
             </a>
             <a
               href="#leistungen"
-              className="group inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent sm:min-h-0"
+              className="group inline-flex min-h-11 items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-accent-bright sm:min-h-0"
             >
               Zur Preisliste
               <span
@@ -250,7 +317,7 @@ export function Hero() {
 
       {/* Bottom info row */}
       <motion.div
-        className="relative z-10 flex flex-col gap-2 border-t border-foreground/10 px-6 py-6 text-[12px] font-semibold uppercase tracking-[0.14em] text-foreground/70 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-[min(10.5vw,152px)]"
+        className="relative z-10 flex flex-col gap-2 border-t border-background/20 px-6 py-6 text-[12px] font-semibold uppercase tracking-[0.14em] text-background/85 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-[min(10.5vw,152px)]"
         style={reducedMotion ? undefined : { opacity: infoOpacity }}
         initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}
