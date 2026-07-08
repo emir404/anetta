@@ -164,7 +164,7 @@ export function Hero() {
       </AnimatePresence>
 
       {/* Masthead: the sign's wordmark at display scale */}
-      <header className="relative z-0 flex flex-col items-center px-6 pt-14 text-center sm:px-10 lg:pt-[clamp(56px,7svh,96px)]">
+      <header className="relative z-0 flex flex-col items-center px-6 pt-[clamp(88px,13svh,124px)] text-center sm:px-10 lg:pt-[clamp(56px,7svh,96px)]">
         <h1 className="flex flex-col items-center">
           <span className="sr-only">Haarstudio Anetta</span>
           <motion.span
