@@ -73,13 +73,21 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   },
 ];
 
-const euro = new Intl.NumberFormat("de-DE", {
-  style: "currency",
-  currency: "EUR",
-});
-
+/**
+ * German salon convention (see DESIGN.md research): cents omitted — "39,–",
+ * "ab 45,–", "auf Anfrage"; "€" stated once in the list footnote, not per row.
+ */
 export function formatPrice(item: ServiceItem): string {
   if (item.price === null) return "auf Anfrage";
-  const amount = euro.format(item.price);
+  const whole = Math.trunc(item.price);
+  const cents = Math.round((item.price - whole) * 100);
+  const amount =
+    cents === 0
+      ? `${whole},–`
+      : `${whole},${cents.toString().padStart(2, "0")}`;
   return item.fromPrice ? `ab ${amount}` : amount;
 }
+
+/** Footnote under the Preisliste — Marlies-Möller-class hedge, house-adapted. */
+export const PRICE_FOOTNOTE =
+  "Alle Preise in Euro. Je nach Haarlänge und Aufwand können die Preise variieren — eine verbindliche Auskunft geben wir Ihnen gern persönlich oder telefonisch.";
