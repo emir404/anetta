@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, Hanken_Grotesk } from "next/font/google";
+import Script from "next/script";
 import { Agentation } from "agentation";
 import "./globals.css";
 import { SmoothScroll } from "./components/SmoothScroll";
@@ -71,6 +72,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SmoothScroll>{children}</SmoothScroll>
         {process.env.NODE_ENV === "development" && <Agentation />}
+        {/* Phillip, the preview agent. The dashboard is blind without this tag. */}
+        <Script
+          src="https://phillip-dashboard-eight.vercel.app/phillip.js"
+          data-preview-id="prv_V6ZhxSA_-DLqHrAnnTCC0"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
